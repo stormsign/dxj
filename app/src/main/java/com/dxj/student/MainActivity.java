@@ -99,35 +99,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    private void register(String token) {
-        String url = FinalData.URL_VALUE + "login";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("mobile", "13588889999");
-        map.put("plainPassword", "123456");
-        map.put("deviceTokens", token);
-        CustomStringRequest cRequest = new CustomStringRequest(Request.Method.POST, url, map, getListener(), getErrorListener());
-        VolleySingleton.getInstance(this).addToRequestQueue(cRequest);
-
-    }
-
-    private Response.Listener<String> getListener() {
-        return new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                showLogI("response " + response);
-            }
-        };
-    }
-
-    private Response.ErrorListener getErrorListener() {
-        return new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                showLogI("response error ");
-            }
-        };
-    }
-
 
     public IUmengRegisterCallback mRegisterCallback = new IUmengRegisterCallback() {
 
@@ -139,7 +110,7 @@ public class MainActivity extends BaseActivity {
                     mPushAgent.isEnabled(), mPushAgent.isRegistered(),
                     mPushAgent.getRegistrationId(), MsgConstant.SDK_VERSION,
                     UmengMessageDeviceConfig.getAppVersionCode(MainActivity.this), UmengMessageDeviceConfig.getAppVersionName(MainActivity.this));
-
+            SPUtils.saveSPData("token", mPushAgent.getRegistrationId());
             Log.i("TAG", "updateStatus:" + info);
             Log.i("TAG", "=============================");
         }
