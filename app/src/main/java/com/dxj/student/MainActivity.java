@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.dxj.student.activity.ChatActivity;
 import com.dxj.student.activity.LoginAndRightActivity;
 import com.dxj.student.activity.UpdateImageActivity;
+import com.dxj.student.activity.UpdateUserInfoActivity;
 import com.dxj.student.base.BaseActivity;
 import com.dxj.student.factory.FragmentFactory;
 import com.dxj.student.http.CustomStringRequest;
@@ -133,7 +134,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.bt_message:
-                Intent intentMulti = new Intent(this, UpdateImageActivity.class);
+                Intent intentMulti = new Intent(this, UpdateUserInfoActivity.class);
                 startActivity(intentMulti);
                 break;
         }

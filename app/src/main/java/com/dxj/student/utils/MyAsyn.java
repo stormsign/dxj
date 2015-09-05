@@ -4,10 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.Toast;
+
 
 import com.dxj.student.bean.PhotoBean;
 import com.dxj.student.bean.Photos;
@@ -16,24 +14,23 @@ import com.dxj.student.http.MyRequest;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+
 // 网络请求
 public class MyAsyn extends AsyncTask<String, String, String> {
     //    private MyException e;
 //    private ProgressFragment progressFragment = ProgressFragment.newInstance();
     private WeakReference<FragmentActivity> oAuthActivityWeakReference;
     private String returnStr; // 请求后的返回值
-    private LinearLayout linearInputContent;
-    private BaseAdapter adapter;
     private String folder;
     private Photos photos;
     private Context recordDetailActivity;
+    private String url;
 
-    public MyAsyn(Context recordDetailActivity, AsyncResponse mAsyncResPonse, LinearLayout linearInputContent, BaseAdapter adapter, String folder) {
+    public MyAsyn(Context recordDetailActivity, AsyncResponse mAsyncResPonse, String folder, String url) {
 //        oAuthActivityWeakReference = new WeakReference<FragmentActivity>(recordDetailActivity);
+        this.url=url;
         this.recordDetailActivity =recordDetailActivity;
         this.mAsyncResponse = mAsyncResPonse;
-        this.linearInputContent = linearInputContent;
-        this.adapter = adapter;
         this.folder = folder;
     }
 
@@ -41,15 +38,13 @@ public class MyAsyn extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        Log.i("TAG", "params=" + params[0]);
         // TODO Auto-generated method stub
         ArrayList<Photos> photosList = new ArrayList<Photos>();
         String bitStr;
 //	Photos photos;
         Bitmap bitmap;
 	try {
-//	    for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++) {
-//		bitmap = Bimp.tempSelectBitmap.get(i).getBitmap();
+//	    for (int i = 0; i < Bimp.tempSelect
         bitmap =MyUtils.createImageThumbnail(recordDetailActivity,folder,800);
         bitStr = Base64.encode(MyUtils.Bitmap2Bytes(bitmap));
         photos = new Photos();
@@ -62,16 +57,15 @@ public class MyAsyn extends AsyncTask<String, String, String> {
 	    e.printStackTrace();
 	}
         PhotoBean mPhotoBean = new PhotoBean();
-        mPhotoBean.setFolder(folder);
+        mPhotoBean.setFolder("head");
         mPhotoBean.setImage(photosList);
         // 第一次请求，先将图片上传到服务器，获得返回 的图片url
         String returnStr = null;
         try {
-            returnStr = MyRequest.getInstance().getRequest(HttpUtils.UPADTE_MULT_IMAGE, mPhotoBean);
+            returnStr = MyRequest.getInstance().getRequest(HttpUtils.UPADTE_MULT_IMAGE, mPhotoBean,url);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.i("TAG", "returnStr=" + returnStr);
             return  returnStr;
             // TODO Auto-generated catch block
         // return returnStr;
@@ -79,7 +73,6 @@ public class MyAsyn extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Log.i("TAG", "result=" + result);
         // TODO Auto-generated method stub
         // if (progressFragment.isVisible()) {
 //        progressFragment.dismissAllowingStateLoss();

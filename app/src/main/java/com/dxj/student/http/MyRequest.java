@@ -5,8 +5,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dxj.student.application.MyApplication;
-import com.dxj.student.utils.MyUtils;
+import com.dxj.student.bean.PhotoBean;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -34,7 +33,7 @@ public class MyRequest {
      * @return
      * @throws MyException
      */
-    public String getRequest(String reqParams, com.dxj.student.bean.PhotoBean mPhotoBean) throws MyException {
+    public String getRequest(String reqParams, PhotoBean mPhotoBean,String url) throws MyException {
         JSONObject jsonObj = new JSONObject();
         String json = "";
         try {
@@ -59,8 +58,6 @@ public class MyRequest {
         // 拼接请求地址
         String urlPath = FinalData.IMAGE_URL_UPLOAD + "multiUploadImage";
 
-        // 请求数据
-        json = MyHttpConnection.httpPost(urlPath, json);
 // 请求数据
         jsonString = MyHttpConnection.httpPost(urlPath, json);
         Log.i("TAG", "jsonString=" + jsonString);

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flowlayout="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.dxj.teacher.widget.TitleNavBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.dxj.teacher.widget.TitleNavBar>
+
+    <LinearLayout
+        android:id="@+id/linear_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_card"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/default_avatar"
+            android:scaleType="centerCrop"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/choice_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:checkedButton="@+id/multi"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="身份证" />
+
+                <RadioButton
+                    android:id="@+id/rb_passport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="护照" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/et_input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/choice_mode"
+                android:hint="请输入姓名" />
+
+            <EditText
+                android:id="@+id/et_input_card_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_input_name"
+                android:hint="请输入证件编号" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/creategroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:clickable="true"
+        android:padding="@dimen/padding_16dp"
+        android:text="提交"
+        android:textSize="@dimen/text_14sp" />
+    <!--style="@style/big_button"-->
+
+</LinearLayout>

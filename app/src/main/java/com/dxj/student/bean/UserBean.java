@@ -31,11 +31,11 @@ public class UserBean extends BaseBean implements Serializable{
         private List<String> images = new ArrayList<String>();
         private String school;//学校
         private String livingCity;//现居城市
-        private String card;//学生证
+//        private String card;//学生证
 
-        public void setCard(String card) {
-            this.card = card;
-        }
+//        public void setCard(String card) {
+//            this.card = card;
+//        }
 
         public void setGrade(String grade) {
             this.grade = grade;
@@ -93,9 +93,9 @@ public class UserBean extends BaseBean implements Serializable{
             return type;
         }
 
-        public String getCard() {
-            return card;
-        }
+//        public String getCard() {
+//            return card;
+//        }
 
         public String getGrade() {
             return grade;

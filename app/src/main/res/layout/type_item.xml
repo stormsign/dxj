@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_parent"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="家长"
+        android:gravity="center"
+        android:textSize="18sp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0dp"
+        android:background="@color/btn_press_color"
+        />
+    <TextView
+        android:id="@+id/tv_child"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="学生"
+        android:gravity="center"
+        android:textSize="18sp"
+        />
+</LinearLayout>

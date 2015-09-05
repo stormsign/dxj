@@ -9,10 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
 import com.dxj.student.R;
+import com.dxj.student.bean.HeadUrl;
+import com.dxj.student.utils.HttpUtils;
 import com.dxj.student.utils.MyAsyn;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class UpdateImageAdapter extends BaseAdapter {
     private List<String> list = new ArrayList<>();
     private boolean isShow;
     private List<String> mSelectedImages = new ArrayList<>();
+    private List<String> imageUrls = new ArrayList<>();
     /**
      * 选择某个图片，改变选择状态
      * @param image
@@ -130,7 +133,7 @@ public class UpdateImageAdapter extends BaseAdapter {
         }
         if (mDatas.get(position) != null && !list.contains(mDatas.get(position))) {
             list.add(mDatas.get(position));
-            MyAsyn asyn = new MyAsyn(context, getAsynResponse(holder.tvUpdate), null, null, mDatas.get(position));
+            MyAsyn asyn = new MyAsyn(context, getAsynResponse(holder.tvUpdate), mDatas.get(position), HttpUtils.UPADTE_MULT_IMAGE);
             asyn.executeOnExecutor(fixedThreadPool, String.valueOf(position));
             holder.tvUpdate.setVisibility(View.VISIBLE);
         } else {
@@ -147,12 +150,7 @@ public class UpdateImageAdapter extends BaseAdapter {
             }
 
         } else {
-//            Picasso.with(context)
-//                    .load(new File(mDatas.get(position)))
-//                    .error(R.drawable.default_error)
-//                    .resize(mImageSize, mImageSize)
-//                    .centerCrop()
-//                    .into(holder.image);
+
             Glide.with(context).load(new File(mDatas.get(position))).error(R.mipmap.default_error).override(mImageSize,mImageSize).centerCrop().into(holder.image);
 //	    holder.image.setImageBitmap(Bimp.tempSelectBitmap.get(position).getBitmap());
             holder.image.setVisibility(convertView.VISIBLE);
@@ -181,10 +179,17 @@ public class UpdateImageAdapter extends BaseAdapter {
 
                 // TODO Auto-generated method stub
                 Log.i("TAG", "Update+result=" + result);
+                Gson gson = new Gson();
+                HeadUrl headUrl = gson.fromJson(result,HeadUrl.class);
+                Log.i("TAG","headUrl="+headUrl.getImages().get(0));
+                imageUrls.add(headUrl.getImages().get(0));
                 tv.setVisibility(View.GONE);
             }
         };
     }
+   public List<String> getImageUrls(){
+       return imageUrls;
+   }
 
     public class ViewHolder {
         public ImageView image;

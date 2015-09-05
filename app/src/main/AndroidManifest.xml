@@ -211,6 +211,12 @@
         <activity android:name=".activity.VideoCallActivity"/>
         <activity android:name=".activity.VoiceCallActivity"/>
         <activity android:name=".activity.LoginAndRightActivity"/>
+        <activity android:name=".activity.UpdateNiceNameActivity"/>
+        <activity android:name=".activity.UpdateLivingCityActivity"/>
+        <activity android:name=".activity.UpdateMobileActivity"/>
+        <activity android:name=".activity.UpdateNameActivity"/>
+        <activity android:name=".activity.UpdateUserInfoActivity"/>
+        <activity android:name=".activity.CardDegreesActvity"/>
     </application>
 
 </manifest>

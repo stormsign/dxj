@@ -179,26 +179,26 @@ public class MainActivity extends Activity {
       }
     };
 
-    SimpleAdapter adapter = new SimpleAdapter(MainActivity.this, isGrid);
-    if (showHeader && showFooter) {
-      showCompleteDialog(holder, gravity, adapter, clickListener, itemClickListener, dismissListener, cancelListener,
-          expanded);
-      return;
-    }
-
-    if (showHeader && !showFooter) {
-      showNoFooterDialog(holder, gravity, adapter, clickListener, itemClickListener, dismissListener, cancelListener,
-          expanded);
-      return;
-    }
-
-    if (!showHeader && showFooter) {
-      showNoHeaderDialog(holder, gravity, adapter, clickListener, itemClickListener, dismissListener, cancelListener,
-          expanded);
-      return;
-    }
-
-    showOnlyContentDialog(holder, gravity, adapter, itemClickListener, dismissListener, cancelListener, expanded);
+//    SimpleAdapter adapter = new SimpleAdapter(MainActivity.this, isGrid);
+//    if (showHeader && showFooter) {
+//      showCompleteDialog(holder, gravity, adapter, clickListener, itemClickListener, dismissListener, cancelListener,
+//          expanded);
+//      return;
+//    }
+//
+//    if (showHeader && !showFooter) {
+//      showNoFooterDialog(holder, gravity, adapter, clickListener, itemClickListener, dismissListener, cancelListener,
+//          expanded);
+//      return;
+//    }
+//
+//    if (!showHeader && showFooter) {
+//      showNoHeaderDialog(holder, gravity, adapter, clickListener, itemClickListener, dismissListener, cancelListener,
+//          expanded);
+//      return;
+//    }
+//
+//    showOnlyContentDialog(holder, gravity, adapter, itemClickListener, dismissListener, cancelListener, expanded);
   }
 
   private void showCompleteDialog(Holder holder, int gravity, BaseAdapter adapter,
