@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_content"
+    android:orientation="vertical">
+
+    <com.dxj.teacher.widget.TitleNavBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@android:color/white"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="手机号码"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_15sp" />
+
+                <ImageView
+                    android:id="@+id/img_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@mipmap/login_icon_qingchu"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/btn_send_code"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="发送验证码"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/linear_pm"
+                android:background="@color/text_black_two" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <EditText
+                    android:id="@+id/et_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="验证码"
+                    android:paddingLeft="@dimen/margin_10dp"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/img_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@mipmap/login_icon_qingchu"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/linear_pm"
+                android:background="@color/text_black_two" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="密码"
+                    android:paddingLeft="@dimen/margin_10dp"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/img_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@mipmap/login_icon_qingchu"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_rese"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_login"
+        android:text="重置密码"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_15sp" />
+</LinearLayout>

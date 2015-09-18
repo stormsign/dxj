@@ -116,6 +116,11 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
         initView();
     }
 
+    @Override
+    public void initTitle() {
+
+    }
+
     //    @Override
 //    public void initTitle() {
 //

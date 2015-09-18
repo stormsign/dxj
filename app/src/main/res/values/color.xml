@@ -14,6 +14,19 @@
     <color name="card_shadow">#D4D4D4</color>
     <color name="black_overlay">#60000000</color>
     <color name="white_overlay">#40FFFFFF</color>
+    <!-- userInfo-->
+    <color name="bg_userinfo">#feb28c</color>
+    <color name="linear">#bfbfbf</color>
+    <color name="text_show">#ff808080</color>
+    <color name="text_show_8b">#ff8b8b8b</color>
+    <color name="text_label_checked">#ffff8b64</color>
+    <color name="text_label">#ff9e9e9e</color>
+    <color name="text_black">#ff323232</color>
+    <color name="text_black_64">#ff646464</color>
+    <color name="text_black_two">#ffBBBBBB</color>
+    <color name="text_black_voice">#ff71bdff</color>
+    <color name="text_price">#ffff704b</color>
+
     <!-- tabStrip color-->
     <color name="azure">#f0ffff</color>
     <color name="background_tab_pressed">#6633B5E5</color>

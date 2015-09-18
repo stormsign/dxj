@@ -1,9 +1,9 @@
-package com.dxj.student.fragment;
+package com.dxj.student.activity;
 
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +17,9 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.dxj.student.R;
-import com.dxj.student.base.BaseFragment;
+import com.dxj.student.base.BaseActivity;
 import com.dxj.student.bean.BaseBean;
+import com.dxj.student.fragment.ProgressFragment;
 import com.dxj.student.http.FinalData;
 import com.dxj.student.http.GsonRequest;
 import com.dxj.student.http.VolleySingleton;
@@ -29,7 +30,7 @@ import com.dxj.student.utils.MyCount;
 import com.dxj.student.utils.MyUtils;
 import com.dxj.student.utils.StringUtils;
 import com.dxj.student.utils.ToastUtils;
-
+import com.dxj.student.widget.TitleNavBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,37 +41,94 @@ import cn.smssdk.SMSSDK;
 
 
 /**
- * 首页
- * Created by khb on 2015/8/19.
+ * Created by kings on 9/13/2015.
+ * 重置密码
  */
-public class RightFragment extends BaseFragment implements View.OnClickListener {
-    private final static int PASSWORD = 0;
-    private final static int TWO_PASSWORD = 1;
-    private final static int PHONE = 2;
-    private final static int CODE = 3;
+public class ResetActivity extends BaseActivity implements View.OnClickListener {
+    private final static int PHONE = 0;
+    private final static int CODE = 1;
+    private final static int PASSWORD = 2;
     /*验证码*/
     private final static String SMSSDK_APP_KEY = "a38245d89da2";
     private final static String SMSSDK_APP_SECRET = "84db45a5b7dcde895fc72f47edf53447";
     private EventHandler eventHandler;
     /*end*/
+    private Button btnRese;
+    private TextView btnSendCode;
     private EditText etPhone;
     private EditText etPassword;
-    private Button btnRight;
-    private EditText etTwoPassword;
     private EditText etCode;
-    private TextView btnSendCode;
-    private MyCount mc;
-    private boolean isMsg = false;
-    private ProgressFragment progress;
     private String strPhone;
+    private MyCount mc;
     private String password;
-    private ImageView imgDelectPassword;
-    private ImageView imgDelectPasswordTwo;
+    private boolean isMsg;
+    private ProgressFragment progress;
     private ImageView imgDelectPhone;
     private ImageView imgDelectCode;
+    private ImageView imgDelectPassword;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reset);
+        initData();
+        initTitle();
+        initView();
+    }
+
+    @Override
+    public void initTitle() {
+        TitleNavBar title = (TitleNavBar) findViewById(R.id.title);
+        title.setTitle("重置密码");
+        title.setTitleNoRightButton();
+        title.setOnTitleNavClickListener(new TitleNavBar.OnTitleNavClickListener() {
+            @Override
+            public void onNavOneClick() {
+
+            }
+
+            @Override
+            public void onNavTwoClick() {
+
+            }
+
+            @Override
+            public void onNavThreeClick() {
+
+            }
+
+            @Override
+            public void onActionClick() {
+
+            }
+
+            @Override
+            public void onBackClick() {
+
+            }
+        });
+    }
+
+    @Override
+    public void initView() {
+        btnSendCode = (TextView) findViewById(R.id.btn_send_code);
+        btnRese = (Button) findViewById(R.id.btn_rese);
+        etPhone = (EditText) findViewById(R.id.et_phone);
+        etPassword = (EditText) findViewById(R.id.et_password);
+        etCode = (EditText) findViewById(R.id.et_code);
+        imgDelectPhone = (ImageView) findViewById(R.id.img_phone);
+        imgDelectCode = (ImageView) findViewById(R.id.img_code);
+        imgDelectPassword = (ImageView) findViewById(R.id.img_password);
+        btnRese.setOnClickListener(this);
+        btnSendCode.setOnClickListener(this);
+        etPhone.addTextChangedListener(getTextWatcher(PHONE));
+        etCode.addTextChangedListener(getTextWatcher(CODE));
+        etPassword.addTextChangedListener(getTextWatcher(PASSWORD));
+    }
 
     @Override
     public void initData() {
+
 //        List<String>
         SMSSDK.initSDK(context, MyUtils.SMSSDK_APP_KEY, MyUtils.SMSSDK_APP_SECRET);
         eventHandler = new EventHandler() {
@@ -97,7 +155,7 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
                         //提交验证码成功
                         Map<String, Object> map = (HashMap<String, Object>) data;
 //                        LogUtils.w("EVENT_SUBMIT_VERIFICATION_CODE " + map.toString());
-                        String urlPath = FinalData.URL_VALUE + HttpUtils.RIGISTER;
+                        String urlPath = FinalData.URL_VALUE + HttpUtils.RESET;
                         Map<String, Object> maps = new HashMap<>();
                         maps.put("mobile", etPhone.getText().toString().trim());
                         try {
@@ -108,7 +166,7 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
                             e.printStackTrace();
                         }
                         GsonRequest<BaseBean> custom = new GsonRequest<>(Request.Method.POST, urlPath, BaseBean.class, maps, getVerifyListener(1), getVerifyErrorListener(1));
-                        VolleySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(custom);
+                        VolleySingleton.getInstance(ResetActivity.this.getApplicationContext()).addToRequestQueue(custom);
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                         //获取验证码成功
                         isMsg = true;
@@ -128,33 +186,6 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
         SMSSDK.getSupportedCountries();
     }
 
-    @Override
-    public View initView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_right, null);
-        etPhone = (EditText) view.findViewById(R.id.et_phone);
-        etPassword = (EditText) view.findViewById(R.id.et_password);
-        btnRight = (Button) view.findViewById(R.id.btn_right);
-        etTwoPassword = (EditText) view.findViewById(R.id.et_two_password);
-        etCode = (EditText) view.findViewById(R.id.et_code);
-        btnSendCode = (TextView) view.findViewById(R.id.btn_send_code);
-
-        imgDelectPassword = (ImageView) view.findViewById(R.id.img_password);
-        imgDelectPasswordTwo = (ImageView) view.findViewById(R.id.img_password_two);
-        imgDelectPhone = (ImageView) view.findViewById(R.id.img_phone);
-        imgDelectCode = (ImageView) view.findViewById(R.id.img_code);
-        btnSendCode.setOnClickListener(this);
-        btnRight.setOnClickListener(this);
-        imgDelectPassword.setOnClickListener(this);
-        imgDelectPhone.setOnClickListener(this);
-        imgDelectCode.setOnClickListener(this);
-        imgDelectPasswordTwo.setOnClickListener(this);
-        etPassword.addTextChangedListener(getTextWatcher(PASSWORD));
-        etTwoPassword.addTextChangedListener(getTextWatcher(TWO_PASSWORD));
-        etPhone.addTextChangedListener(getTextWatcher(PHONE));
-        etCode.addTextChangedListener(getTextWatcher(CODE));
-        return view;
-    }
-
     private TextWatcher getTextWatcher(final int index) {
         return new TextWatcher() {
             @Override
@@ -170,18 +201,6 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void afterTextChanged(Editable s) {
                 switch (index) {
-                    case PASSWORD:
-                        if (StringUtils.isEmpty(etPassword.getText().toString()))
-                            imgDelectPassword.setVisibility(View.GONE);
-                        else
-                            imgDelectPassword.setVisibility(View.VISIBLE);
-                        break;
-                    case TWO_PASSWORD:
-                        if (StringUtils.isEmpty(etTwoPassword.getText().toString()))
-                            imgDelectPasswordTwo.setVisibility(View.GONE);
-                        else
-                            imgDelectPasswordTwo.setVisibility(View.VISIBLE);
-                        break;
                     case PHONE:
                         if (StringUtils.isEmpty(etPhone.getText().toString()))
                             imgDelectPhone.setVisibility(View.GONE);
@@ -194,6 +213,13 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
                         else
                             imgDelectCode.setVisibility(View.VISIBLE);
                         break;
+                    case PASSWORD:
+                        if (StringUtils.isEmpty(etPassword.getText().toString()))
+                            imgDelectPassword.setVisibility(View.GONE);
+                        else
+                            imgDelectPassword.setVisibility(View.VISIBLE);
+                        break;
+
                 }
             }
         };
@@ -203,18 +229,14 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.btn_right:
-                //注册
-                right();
-                break;
             case R.id.btn_send_code:
                 sendCode();
                 break;
+            case R.id.btn_rese:
+                right();
+                break;
             case R.id.img_password:
                 etPassword.setText("");
-                break;
-            case R.id.img_password_two:
-                etTwoPassword.setText("");
                 break;
             case R.id.img_phone:
                 etPhone.setText("");
@@ -223,7 +245,6 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
                 etCode.setText("");
                 break;
         }
-
     }
 
     private void sendCode() {
@@ -240,25 +261,23 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
         }
         SMSSDK.getVerificationCode("86", strPhone);
         if (mc == null) {
-            mc = new MyCount(60000, 1000, btnSendCode, getActivity()); // 第一参数是总的时间，第二个是间隔时间 都是毫秒为单位
+            mc = new MyCount(60000, 1000, btnSendCode, this); // 第一参数是总的时间，第二个是间隔时间 都是毫秒为单位
         }
         mc.start();
     }
 
-
     private void right() {
         password = etPassword.getText().toString().trim();
-        String twoPassword = etTwoPassword.getText().toString().trim();
         String strCode = etCode.getText().toString().trim();
-//        if (!isMsg) {
-//            ToastUtils.showToast(getActivity(), "请先获取验证码");
-//            return;
-//        }
-//        if (StringUtils.isEmpty(strCode)) {
-//            etCode.setError("请输入您验证码");
-//            etCode.requestFocus();
-//            return;
-//        }
+        if (!isMsg) {
+            ToastUtils.showToast(this, "请先获取验证码");
+            return;
+        }
+        if (StringUtils.isEmpty(strCode)) {
+            etCode.setError("请输入您验证码");
+            etCode.requestFocus();
+            return;
+        }
         if (StringUtils.isEmpty(password)) {
             etPassword.setError("请输入您的密码");
             etPassword.requestFocus();
@@ -274,17 +293,8 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
             etPassword.requestFocus();
             return;
         }
-        if (StringUtils.isEmpty(twoPassword)) {
-            etTwoPassword.setError("请输入您的密码");
-            etTwoPassword.requestFocus();
-            return;
-        }
-        if (!twoPassword.equals(password)) {
-            etTwoPassword.setError("两次密码不同");
-            etTwoPassword.requestFocus();
-            return;
-        }
-//        SMSSDK.submitVerificationCode("86", strPhone, strCode);
+
+        SMSSDK.submitVerificationCode("86", strPhone, strCode);
 
 //        if (!IhomeUtils.checkPasswordSpecialChar(password)) {
 //            ToastUtils.showToast(getActivity(), "密码仅允许字母及数字组合");
@@ -295,26 +305,8 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
 //            return;
 //        }
         progress = ProgressFragment.newInstance();
-        progress.show(getFragmentManager(), "right");
-//        String urlPath = FinalData.URL_VALUE + "checkMsgCode";
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("mobile", etPhone.getText().toString().trim());
-//        map.put("code", strCode);
-//        GsonRequest<BaseBean> custom = new GsonRequest<>(Request.Method.POST, urlPath, BaseBean.class,map, getVerifyListener(0), getVerifyErrorListener(0));
+        progress.show(getSupportFragmentManager(), "right");
 
-//        VolleySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(custom);
-        String urlPath = FinalData.URL_VALUE + HttpUtils.RIGISTER;
-        Map<String, Object> map = new HashMap<>();
-        map.put("mobile", etPhone.getText().toString().trim());
-        try {
-
-            map.put("plainPassword", AesUtil.Encrypt(password, AesUtil.cKey));
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        GsonRequest<BaseBean> custom = new GsonRequest<>(Request.Method.POST, urlPath, BaseBean.class, map, getVerifyListener(1), getVerifyErrorListener(1));
-        VolleySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(custom);
     }
 
     public Response.Listener<BaseBean> getVerifyListener(final int tag) {
@@ -345,6 +337,8 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
                 } else if (tag == 1) {
                     /** TAG==1 表示这是注册 */
                     if (response.getCode() == 0) {
+                        ToastUtils.showToast(context, response.getMsg());
+
                     }
                 }
             }
@@ -360,16 +354,15 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
                 Log.i("TAG", "onErrorResponse=" + error.getMessage());
                 progress.dismissAllowingStateLoss();
                 if (error instanceof TimeoutError)
-                    ToastUtils.showToast(getActivity(), "请求超时");
+                    ToastUtils.showToast(ResetActivity.this, "请求超时");
                 else if (error instanceof NoConnectionError)
-                    ToastUtils.showToast(getActivity(), "没有网络连接");
+                    ToastUtils.showToast(ResetActivity.this, "没有网络连接");
                 else if (error instanceof ServerError)
-                    ToastUtils.showToast(getActivity(), "服务器异常 注册失败");
+                    ToastUtils.showToast(ResetActivity.this, "服务器异常 注册失败");
                 if (tag == 0) {
 
                 }
             }
         };
     }
-
 }

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.dxj.student.R;
 
-
 /**低級自定義標題欄
  * Created by khb on 2015/8/28.
  */
@@ -23,12 +22,15 @@ public class TitleNavBar extends RelativeLayout {
     private TextView title;
     private RelativeLayout search_container;
     private EditText search;
-    private ImageView nav_1;
-    private ImageView nav_2;
-    private ImageView nav_3;
+    public ImageView nav_1;
+    public ImageView nav_2;
+    public TextView nav_3;
 
     private boolean isSearchBar = false;
     private RelativeLayout container;
+    public TextView action;
+    private boolean isDisableBack = false;
+    public ImageView back;
 
     public TitleNavBar(Context context) {
         this(context, null);
@@ -50,6 +52,7 @@ public class TitleNavBar extends RelativeLayout {
         void onNavOneClick();
         void onNavTwoClick();
         void onNavThreeClick();
+        void onActionClick();
         void onBackClick();
     }
 
@@ -62,25 +65,30 @@ public class TitleNavBar extends RelativeLayout {
     private void initView() {
         View view = inflater.inflate(R.layout.layout_title, this);
         container = (RelativeLayout) view.findViewById(R.id.rl_title_container);
-        ImageView back = (ImageView) view.findViewById(R.id.back);
+        back = (ImageView) view.findViewById(R.id.back);
         title = (TextView) view.findViewById(R.id.tv_title);
         search_container = (RelativeLayout) view.findViewById(R.id.rl_search_title_container);
         search = (EditText) view.findViewById(R.id.et_search);
+        action = (TextView) view.findViewById(R.id.tv_action);
+        action.setClickable(true);
         nav_1 = (ImageView) view.findViewById(R.id.iv_nav_1);
         nav_1.setClickable(true);
         nav_2 = (ImageView) view.findViewById(R.id.iv_nav_2);
         nav_2.setClickable(true);
-        nav_3 = (ImageView) view.findViewById(R.id.iv_nav_3);
+        nav_3 = (TextView) view.findViewById(R.id.iv_nav_3);
         nav_3.setClickable(true);
 
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnTitleNavClickListener != null){
+
+                if (mOnTitleNavClickListener != null) {
                     mOnTitleNavClickListener.onBackClick();
                 }
-                Activity activity = (Activity) mContext;
-                activity.finish();
+                if (!isDisableBack) {
+                    Activity activity = (Activity) mContext;
+                    activity.finish();
+                }
             }
         });
         if (!isSearchBar){
@@ -90,7 +98,7 @@ public class TitleNavBar extends RelativeLayout {
             nav_1.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mOnTitleNavClickListener != null){
+                    if (mOnTitleNavClickListener != null) {
                         mOnTitleNavClickListener.onNavOneClick();
                     }
                 }
@@ -112,6 +120,16 @@ public class TitleNavBar extends RelativeLayout {
                 public void onClick(View v) {
                     if (mOnTitleNavClickListener != null){
                         mOnTitleNavClickListener.onNavThreeClick();
+                    }
+                }
+            });
+        }
+        if (action.getVisibility() == View.VISIBLE){
+            action.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnTitleNavClickListener != null){
+                        mOnTitleNavClickListener.onActionClick();
                     }
                 }
             });
@@ -138,11 +156,13 @@ public class TitleNavBar extends RelativeLayout {
             search_container.setVisibility(View.VISIBLE);
             nav_1.setVisibility(View.GONE);
             nav_2.setVisibility(View.GONE);
+            action.setVisibility(GONE);
             isSearchBar = true;
         }else{
             search_container.setVisibility(View.GONE);
             nav_1.setVisibility(View.VISIBLE);
             nav_2.setVisibility(View.VISIBLE);
+            action.setVisibility(VISIBLE);
             isSearchBar = false;
         }
     }
@@ -153,14 +173,21 @@ public class TitleNavBar extends RelativeLayout {
     public void setNavTwoImageResource(int resource){
         nav_2.setImageResource(resource);
     }
-    public void setNavThreeImageResource(int resource){
-        nav_3.setImageResource(resource);
+//    public void setNavThreeImageResource(int resource){
+//        nav_3.setImageResource(resource);
+//    }
+    public  void setNavThreeText(String text){
+        nav_3.setText(text);
     }
     /**
      *設置搜索條提示信息
      */
     public void setSearchHint(String hint){
         search.setHint(hint);
+    }
+
+    public String getSearchContent(){
+        return search.getText().toString();
     }
 
     /**
@@ -171,12 +198,71 @@ public class TitleNavBar extends RelativeLayout {
         container.setBackgroundResource(resource);
     }
 
+    /**
+     * 右侧无按钮
+     */
     public void setTitleNoRightButton(){
         nav_1.setVisibility(GONE);
         nav_2.setVisibility(GONE);
+        action.setVisibility(GONE);
     }
 //    public void setContainerBackgroundColor(int resource){
 //        container.set
 //    }
+
+    public void setActionText(String text){
+        action.setText(text);
+    }
+
+    /**
+     * 右边只显示文字按钮
+     */
+    public void showActionOnly(){
+        nav_1.setVisibility(View.GONE);
+        nav_2.setVisibility(View.GONE);
+        nav_3.setVisibility(View.GONE);
+        action.setVisibility(View.VISIBLE);
+    }
+
+    public void showNavOne(boolean flag){
+        if (flag){
+            nav_1.setVisibility(VISIBLE);
+        }else{
+            nav_1.setVisibility(GONE);
+        }
+    }
+
+    public void showNavTwo(boolean flag){
+        if (flag){
+            nav_2.setVisibility(VISIBLE);
+        }else{
+            nav_2.setVisibility(GONE);
+        }
+    }
+
+    public void showNavThree(boolean flag){
+        if (flag){
+            nav_3.setVisibility(VISIBLE);
+        }else{
+            nav_3.setVisibility(GONE);
+        }
+    }
+
+    public void showAction(boolean flag){
+        if (flag){
+            action.setVisibility(VISIBLE);
+        }else{
+            action.setVisibility(GONE);
+        }
+    }
+
+    /**
+     * 取消返回键功能
+     * @param isDisable
+     */
+    public void disableBack(boolean isDisable){
+        isDisableBack = isDisable;
+    }
+
 
 }

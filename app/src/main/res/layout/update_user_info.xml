@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,7 +8,7 @@
     <com.dxj.student.widget.TitleNavBar
         android:id="@+id/tnb"
         android:layout_width="match_parent"
-        android:layout_height="56dp" />
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,209 +20,287 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/relative_avatar"
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="用户头像" />
+                <RelativeLayout
+                    android:id="@+id/relative_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/default_avatar" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="用户头像"
+                        android:layout_marginLeft="@dimen/sidebar_text_size"
+                        />
 
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/default_avatar" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
-            <RelativeLayout
-                android:id="@+id/relative_nicename"
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="昵称" />
+                <RelativeLayout
+                    android:id="@+id/relative_nicename"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_nicename"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="你是谁" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="昵称" />
 
-            <RelativeLayout
-                android:id="@+id/relative_mobile"
+                    <TextView
+                        android:id="@+id/tv_nicename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="你是谁" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="电话号码" />
+                <RelativeLayout
+                    android:id="@+id/relative_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_mobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="电话号码" />
 
-            <RelativeLayout
-                android:id="@+id/relative_type"
+                    <TextView
+                        android:id="@+id/tv_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="角色" />
+                <RelativeLayout
+                    android:id="@+id/relative_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="角色" />
 
-            <RelativeLayout
-                android:id="@+id/relative_name"
+                    <TextView
+                        android:id="@+id/tv_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="真是姓名" />
+                <RelativeLayout
+                    android:id="@+id/relative_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="真是姓名" />
 
-            <RelativeLayout
-                android:id="@+id/relative_sex"
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="性别" />
+                <RelativeLayout
+                    android:id="@+id/relative_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="性别" />
 
-            <RelativeLayout
-                android:id="@+id/relative_constellation"
+                    <TextView
+                        android:id="@+id/tv_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="星座" />
+                <RelativeLayout
+                    android:id="@+id/relative_constellation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_constellation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="星座" />
 
-            <RelativeLayout
-                android:id="@+id/relative_grade"
+                    <TextView
+                        android:id="@+id/tv_constellation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="年级" />
+                <RelativeLayout
+                    android:id="@+id/relative_grade"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_grade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="年级" />
 
-            <RelativeLayout
-                android:id="@+id/relative_card"
+                    <TextView
+                        android:id="@+id/tv_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="学习证" />
+                <RelativeLayout
+                    android:id="@+id/relative_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="学习证" />
 
-            <RelativeLayout
-                android:id="@+id/relative_images"
+                    <TextView
+                        android:id="@+id/tv_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="照片" />
+                <RelativeLayout
+                    android:id="@+id/relative_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_images"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="照片" />
 
-            <RelativeLayout
-                android:id="@+id/relative_livingcity"
+                    <TextView
+                        android:id="@+id/tv_images"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="现居地" />
+                <RelativeLayout
+                    android:id="@+id/relative_livingcity"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/linear_60dp">
 
-                <TextView
-                    android:id="@+id/tv_livingcity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="现居地" />
+
+                    <TextView
+                        android:id="@+id/tv_livingcity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

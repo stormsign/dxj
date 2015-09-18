@@ -95,8 +95,8 @@ public class MainActivity extends BaseActivity {
                             // 取好友或者群聊失败，不让进入主页面
                             runOnUiThread(new Runnable() {
                                 public void run() {
-                                    DemoHXSDKHelper.getInstance().logout(true,null);
-                                    Toast.makeText(getApplicationContext(), R.string.login_failure_failed, 1).show();
+                                    DemoHXSDKHelper.getInstance().logout(true, null);
+//                                    Toast.makeText(getApplicationContext(), R.string.login_failure_failed, 1).show();
                                 }
                             });
                             return;
@@ -126,7 +126,8 @@ public class MainActivity extends BaseActivity {
 //        register(device_token);
 
     }
-//    环信账号登录后的处理
+
+    //    环信账号登录后的处理
     private void initializeContacts() {
         Map<String, User> userlist = new HashMap<String, User>();
         // 添加user"申请与通知"

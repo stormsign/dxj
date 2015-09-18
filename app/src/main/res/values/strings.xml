@@ -358,4 +358,8 @@
     <string name="preview">Preview</string>
     <string name="msg_no_camera">No system camera found</string>
     <string name="msg_amount_limit">Select images amount is limit</string>
+
+    <string name="edit_search">输入老师手机号或学团名称</string>
+    <string name="error_msg">啊哦，出问题了，待会再来试试吧</string>
+    <string name="system_notice">系统通知</string>
 </resources>

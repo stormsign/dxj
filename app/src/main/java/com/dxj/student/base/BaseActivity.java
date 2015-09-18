@@ -1,5 +1,6 @@
 package com.dxj.student.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +15,14 @@ public abstract class BaseActivity extends FinalActivity {
 
     protected MyApplication mApplication;
     protected Context context;
+    protected Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApplication = MyApplication.getInstance();
         context = this;
+        activity = this;
         PushAgent.getInstance(context).onAppStart();
     }
 
@@ -53,8 +56,12 @@ public abstract class BaseActivity extends FinalActivity {
         finish();
     }
 
-    //        初始化标题栏
 //        处理消息栏
+
+    /**
+     * 初始化标题栏
+     */
+    public abstract void initTitle();
 
     /**
      * 处理页面展示

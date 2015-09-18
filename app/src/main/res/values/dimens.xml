@@ -31,9 +31,15 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="image_thumbnail_size">100dp</dimen>
     <dimen name="image_thumbnail_spacing">1dp</dimen>
+
+    <!--环信dimens 结束-->
+
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="text_12sp">12sp</dimen>
+    <dimen name="text_9sp">9sp</dimen>
     <dimen name="text_14sp">14sp</dimen>
+    <dimen name="text_15sp">15sp</dimen>
+    <dimen name="text_13sp">13sp</dimen>
     <dimen name="text_16sp">16sp</dimen>
     <dimen name="text_20sp">20sp</dimen>
     <dimen name="text_24sp">24sp</dimen>
@@ -44,13 +50,33 @@
     <dimen name="height_128dp">128dp</dimen>
     <dimen name="image_80dp">80dp</dimen>
     <dimen name="image_96dp">96dp</dimen>
-    <dimen name="image_88dp">88dp</dimen>
+    <dimen name="linear_60dp">50dp</dimen>
+    <dimen name="image_64dp">64dp</dimen>
     <dimen name="margin_24dp">24dp</dimen>
     <dimen name="margin_56dp">56dp</dimen>
     <dimen name="margin_36dp">36dp</dimen>
     <dimen name="margin_64dp">64dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="image_36dp">36dp</dimen>
     <dimen name="image_48dp">48dp</dimen>
+    <dimen name="height_56dp">56dp</dimen>
+    <dimen name="elevation_2dp">2dp</dimen>
+    <dimen name="height_32dp">32dp</dimen>
+    <dimen name="height_48dp">48dp</dimen>
+    <dimen name="height_80dp">80dp</dimen>
+    <dimen name="height_88dp">88dp</dimen>
+    <dimen name="image_24dp">24dp</dimen>
+    <dimen name="desc_width_256">256dp</dimen>
+    <dimen name="text_line_72dp">72dp</dimen>
+    <dimen name="message_to_head">28dp</dimen>
+    <dimen name="message_to_other_side">16dp</dimen>
+    <dimen name="message_to_top">12dp</dimen>
+    <dimen name="message_to_bottom">16dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
+    <dimen name="notification_card_margin">22dp</dimen>
+    <dimen name="notification_card_padding">8dp</dimen>
+    <dimen name="notification_content_to_title">5dp</dimen>
 
-    <!--环信dimens 结束-->
 
 </resources>

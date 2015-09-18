@@ -32,6 +32,8 @@ import java.util.zip.GZIPInputStream;
  * Created by khb on 2015/8/20.
  */
 public class MyUtils {
+    public final static String SMSSDK_APP_KEY = "a38245d89da2";
+    public final static String SMSSDK_APP_SECRET = "84db45a5b7dcde895fc72f47edf53447";
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */

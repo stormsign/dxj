@@ -49,4 +49,5 @@ public class HttpUtils {
 	public static final String  IMAGES="images";
 
 	public static final String  CARD="card";
+	public static final String  RESET="reset";
 }

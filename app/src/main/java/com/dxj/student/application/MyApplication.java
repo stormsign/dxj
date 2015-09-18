@@ -108,5 +108,8 @@ public class MyApplication extends Application {
     public static MyApplication getInstance(){
         return instance;
     }
+    public void setUserBean(UserBean userbean) {
+        this.mUserBean = userbean;
+    }
 
 }
