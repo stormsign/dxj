@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.dxj.teacher.widget.TitleNavBar
+    <com.dxj.student.widget.TitleNavBar
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.dxj.teacher.widget.TitleNavBar>
+        android:layout_height="wrap_content"></com.dxj.student.widget.TitleNavBar>
 
     <LinearLayout
         android:id="@+id/linear_card"

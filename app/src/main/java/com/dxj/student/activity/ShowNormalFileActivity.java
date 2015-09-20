@@ -74,6 +74,11 @@ public class ShowNormalFileActivity extends BaseActivity {
 	}
 
     @Override
+    public void initTitle() {
+
+    }
+
+    @Override
     public void initView() {
 
     }

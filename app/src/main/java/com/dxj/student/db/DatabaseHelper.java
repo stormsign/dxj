@@ -20,20 +20,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-//	public static final String TABLE_NAME = "account_table";
-//	public static final  String ID ="id"; //用户id/
-//	public static final String NICKNAME="nickName";//用户昵称/
-//	public static final String HEADURL="headUrl";//头像/
-//	public static final String SET="sex";//性别/
-//	public static final String TYPE="type";//学生or家长/
-//	public static final String MOBILE="mobile";//手机号码//
-//	public static final String HOROSCOPE="horoscope";//星座/
-//	public static final String GRADE="grade";//年级
-//	public static final String SCHOOL="school";//学校/
-//	public static final String LIVINGCITY="livingCity";//现居城市
     static final String CREATE_ACCOUNT_TABLE_SQL = "create table " + AccountTable.TABLE_NAME + "(" + AccountTable.ID + " text primary key,"
 	    + AccountTable.NICKNAME + " text," + AccountTable.SET + " text," + AccountTable.TYPE + " text,"  + AccountTable.MOBILE
-	    + " text," +AccountTable.HEADURL+" text," + AccountTable.SCHOOL + " text," +AccountTable.NAME+ " text,"+ AccountTable.LIVINGCITY + " text," +AccountTable.GRADE+" text,"+ AccountTable.HOROSCOPE + " text" +");";
+	    + " text," +AccountTable.HEADURL+" text," + AccountTable.SCHOOL + " text," +AccountTable.NAME+ " text,"+AccountTable.PHOTO+" text,"+ AccountTable.LIVINGCITY + " text," +AccountTable.GRADE+" text,"+ AccountTable.HOROSCOPE + " text" +");";
 
     DatabaseHelper(Context context) {
 	super(context, DATABASE_NAME, null, DATABASE_VERSION);

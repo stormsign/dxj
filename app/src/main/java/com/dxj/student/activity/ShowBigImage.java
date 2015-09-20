@@ -107,6 +107,11 @@ public class ShowBigImage extends BaseActivity {
 	}
 
 	@Override
+	public void initTitle() {
+
+	}
+
+	@Override
 	public void initView() {
 
 	}

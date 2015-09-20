@@ -16,7 +16,7 @@ public class HttpUtils {
 	public static final String SEX="sex";
 	//方言
 	public static final String MOBILE="mobile";
-	//国籍
+	//角色
 	public static final String TYPE="type";
 	//专业
 	public static final String NAME="name";
@@ -50,4 +50,5 @@ public class HttpUtils {
 
 	public static final String  CARD="card";
 	public static final String  RESET="reset";
+	public static final String  TEACHERINFO="teacherInfo";
 }

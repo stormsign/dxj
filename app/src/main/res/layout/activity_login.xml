@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         >
 
-        <com.dxj.teacher.widget.PagerSlidingTabStrip
+        <com.dxj.student.widget.PagerSlidingTabStrip
             android:id="@+id/tabs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

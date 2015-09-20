@@ -23,6 +23,11 @@ public class CardDegreesActvity extends CardBaseActvity {
     }
 
     @Override
+    public void initTitle() {
+
+    }
+
+    @Override
     protected String getUrl() {
         return HttpUtils.CARD;
     }

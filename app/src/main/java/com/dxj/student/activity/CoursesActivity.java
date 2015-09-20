@@ -42,6 +42,11 @@ public class CoursesActivity extends BaseActivity {
     }
 
     @Override
+    public void initTitle() {
+
+    }
+
+    @Override
     public void initView() {
 
         lv_first = (ListView) findViewById(R.id.lv_first_category);

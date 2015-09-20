@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="laoshi"
-        android:onClick="show"/>
+        android:onClick="show"
+        android:text="laoshi" />
 
+    <Button
+        android:id="@+id/userinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="个人信息" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录" />
+
+    <Button
+    android:id="@+id/btn_teacher_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="老师详情" />
+    <Button
+        android:id="@+id/btn_teacher_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="科目" />
 </LinearLayout>

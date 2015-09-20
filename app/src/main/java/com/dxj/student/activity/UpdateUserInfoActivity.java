@@ -39,6 +39,7 @@ import com.dxj.student.utils.MyAsyn;
 import com.dxj.student.utils.MyUtils;
 import com.dxj.student.utils.StringUtils;
 import com.dxj.student.utils.UpdatePhotoUtils;
+import com.dxj.student.widget.TitleNavBar;
 import com.google.gson.Gson;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.Holder;
@@ -49,6 +50,7 @@ import com.orhanobut.dialogplus.OnDismissListener;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +69,7 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
     public static final int NATIONALITY = 3;
     public static final int NAME = 4;
     public static final int LIVING_CITY = 5;
+    public static final int IMAGES = 6;
     private RelativeLayout relativeNiceName;
     private RelativeLayout relativeSex;
     private RelativeLayout relativeMobile;
@@ -95,7 +98,23 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
     private String imagePath;
     private String strGrade;
     private String str;
-
+//值
+    private String niceName;
+    private String name;
+    private String dialect;
+    private String nationality;
+    private String strSchoolAge;
+    private ArrayList<String> labelList;
+    private ArrayList<String> labelList1;
+    private String strLivingCity;
+    private String strRemark;
+    private String strExperience;
+    private String strResult;
+    private String strResult1;
+    private String strSchool;
+    private String strPhotoCount;
+    private String struniversity;
+    private String mobile;
     private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -114,11 +133,14 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.update_user_info);
         initData();
         initView();
+        initTitle();
     }
 
     @Override
     public void initTitle() {
-
+        TitleNavBar title = (TitleNavBar)findViewById(R.id.title);
+        title.setTitleNoRightButton();
+        title.setTitle("个人资料");
     }
 
     //    @Override
@@ -319,7 +341,7 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
     private void sendRequestData(String strSex, int index) {
         String urlPath = null;
         Map<String, Object> map = new HashMap<>();
-        map.put("id", "e1c380f1-c85e-4a0f-aafc-152e189d9d01");
+        map.put("id", userBean.getUserInfo().getId());
         if (index == 5) {
             Log.i("TAG", "strSex=" + strSex);
             map.put("grade", strSex);
@@ -342,7 +364,8 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
                 map.put("type", 1);
                 strSex = "1";
             }
-            urlPath = FinalData.URL_VALUE + HttpUtils.HEAD_URL;
+            urlPath = FinalData.URL_VALUE + HttpUtils.TYPE;
+            Log.i("TAG","type"+urlPath);
         }
 
 
@@ -461,30 +484,22 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
         }
     };
 
-    private void startPhotoZoom() {
-        Intent intent;
-        if (Build.VERSION.SDK_INT < 19) {
-            intent = new Intent();
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            startActivityForResult(Intent.createChooser(intent, "选择图片"), RESULT_LOAD_IMAGE);
-        } else {
-            intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            startActivityForResult(Intent.createChooser(intent, "选择图片"), RESULT_LOAD_IMAGE);
-        }
-    }
+
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         Log.i("TAG", "id=" + id);
+        String userId = userBean.getUserInfo().getId();
+
         switch (id) {
             case R.id.relative_avatar:
                 UpdatePhotoUtils.startPhotoZoom(this);
                 break;
             case R.id.relative_nicename:
                 Intent intentNiceName = new Intent(this, UpdateNiceNameActivity.class);
+                intentNiceName.putExtra("niceName", niceName);
+                intentNiceName.putExtra("id", userId);
                 startActivityForResult(intentNiceName, NICE_NAME);
                 break;
             case R.id.relative_sex:
@@ -495,14 +510,20 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.relative_name:
                 Intent intentName = new Intent(this, UpdateNameActivity.class);
+                intentName.putExtra("name", name);
+                intentName.putExtra("id", userId);
                 startActivityForResult(intentName, NAME);
                 break;
             case R.id.relative_mobile:
-                Intent intentLabel = new Intent(this, UpdateMobileActivity.class);
-                startActivityForResult(intentLabel, MOBILE);
+                Intent intentMobile = new Intent(this, UpdateMobileActivity.class);
+                intentMobile.putExtra("Mobile", mobile);
+                intentMobile.putExtra("id", userId);
+                startActivityForResult(intentMobile, MOBILE);
                 break;
             case R.id.relative_livingcity:
                 Intent intentLivingCity = new Intent(this, UpdateLivingCityActivity.class);
+                intentLivingCity.putExtra("address", strLivingCity);
+                intentLivingCity.putExtra("id", userId);
                 startActivityForResult(intentLivingCity, LIVING_CITY);
                 break;
             case R.id.relative_constellation:
@@ -517,69 +538,12 @@ public class UpdateUserInfoActivity extends BaseActivity implements View.OnClick
                 Intent intentCard = new Intent(this, CardDegreesActvity.class);
                 startActivityForResult(intentCard, LIVING_CITY);
                 break;
+            case R.id.relative_images:
+                Intent intentImages = new Intent(this, UpdateImageActivity.class);
+                intentImages.putExtra("id",userId);
+                startActivityForResult(intentImages, IMAGES);
+                break;
         }
     }
-//    private void startPhotoZoomOne(Uri uri) {
-//        try {
-//            // 获取系统时间 然后将裁剪后的图片保存至指定的文件夹
-//            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
-//            String address = sDateFormat.format(new Date());
-//            if (!PhotoFileUtils.isFileExist("")) {
-//                PhotoFileUtils.createSDDir("");
-//
-//            }
-//            imagePath = PhotoFileUtils.SDPATH + address + ".JPEG";
-//            Uri imageUri = Uri.parse("file:///sdcard/formats/" + address + ".JPEG");
-//
-//            final Intent intent = new Intent("com.android.camera.action.CROP");
-//            // Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
-//Log.i("TAG","imagePaht="+imagePath);
-//            // 照片URL地址
-//            intent.setDataAndType(uri, "image/*");
-//
-//            intent.putExtra("crop", "true");
-//            intent.putExtra("aspectX", 2);
-//            intent.putExtra("aspectY", 2);
-//            intent.putExtra("outputX", 200);
-//            intent.putExtra("outputY", 200);
-//            // 输出路径
-//            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-//            // 输出格式
-//            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-//            // 不启用人脸识别
-//            intent.putExtra("noFaceDetection", false);
-//            intent.putExtra("return-data", false);
-//            startActivityForResult(intent, CUT_PHOTO_REQUEST_CODE);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    public void photo() {
-//        String savePath = "";
-//        String storageState = Environment.getExternalStorageState();
-//        if (storageState.equals(Environment.MEDIA_MOUNTED)) {
-//            savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/yunduo/Camera/";
-//            File savedir = new File(savePath);
-//            if (!savedir.exists()) {
-//                savedir.mkdirs();
-//            }
-//        }
-//
-//        // 没有挂载SD卡，无法保存文件
-//        if (StringUtils.isEmpty(savePath)) {
-//            showToast("无法保存照片，请检查SD卡是否挂载");
-//            return;
-//        }
-//
-//        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-//        String fileName = "dxj_" + timeStamp + ".jpg";// 照片命名
-//        File out = new File(savePath, fileName);
-//        photoUri = Uri.fromFile(out);
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-//        startActivityForResult(intent, TAKE_PICTURE);
-//    }
-
 
 }

@@ -23,6 +23,7 @@ import com.dxj.student.http.VolleySingleton;
 import com.dxj.student.utils.HttpUtils;
 import com.dxj.student.utils.StringUtils;
 import com.dxj.student.utils.ToastUtils;
+import com.dxj.student.widget.TitleNavBar;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,10 +32,10 @@ import java.util.Map;
  * Created by kings on 8/27/2015.
  * 别名
  */
-public class UpdateNiceNameActivity extends BaseActivity implements View.OnClickListener {
-    private ImageButton btnNiceName;
+public class UpdateNiceNameActivity extends BaseActivity {
     private EditText etNiceName;
     private String strNiceName;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,43 @@ public class UpdateNiceNameActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.activity_update_nicename);
         initData();
         initView();
+        initTitle();
     }
 
+    @Override
+    public void initTitle() {
+        TitleNavBar title = (TitleNavBar)findViewById(R.id.title);
+        title.disableBack(true);
+        title.setTitle("昵称");
+        title.setTitleNoRightButton();
+
+        title.setOnTitleNavClickListener(new TitleNavBar.OnTitleNavClickListener() {
+            @Override
+            public void onNavOneClick() {
+
+            }
+
+            @Override
+            public void onNavTwoClick() {
+
+            }
+
+            @Override
+            public void onNavThreeClick() {
+
+            }
+
+            @Override
+            public void onActionClick() {
+
+            }
+
+            @Override
+            public void onBackClick() {
+                sendRequestData();
+            }
+        });
+    }
 //    @Override
 //    public void initTitle() {
 //
@@ -51,36 +87,29 @@ public class UpdateNiceNameActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-        btnNiceName = (ImageButton) findViewById(R.id.btn_back);
         etNiceName = (EditText) findViewById(R.id.et);
-        btnNiceName.setOnClickListener(this);
+        etNiceName.setText(strNiceName);
     }
 
     @Override
     public void initData() {
-
+        strNiceName = getIntent().getStringExtra("niceName");
+        id = getIntent().getStringExtra("id");
     }
 
 
-//    @Override
-//    public void onClick(View v) {
-//        int id = v.getId();
-//        switch (id) {
-//            case R.id.btn_back:
-//                sendRequestData();
-//                break;
-//        }
-//    }
+
 
     private void sendRequestData() {
         strNiceName = etNiceName.getText().toString().trim();
+        Log.i("TAG","strName="+strNiceName);
         if (StringUtils.isEmpty(strNiceName)) {
             finish();
             return;
         }
         String urlPath = FinalData.URL_VALUE + HttpUtils.NICE_NAME;
         Map<String, Object> map = new HashMap<>();
-        map.put("id", "faf58cf0-c65e-4d53-b73e-ecea691a8dad");
+        map.put("id", id);
         map.put("nickName", strNiceName);
         CustomStringRequest custom = new CustomStringRequest(Request.Method.POST, urlPath, map, getListener(), getErrorListener());
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(custom);
@@ -117,13 +146,5 @@ public class UpdateNiceNameActivity extends BaseActivity implements View.OnClick
         };
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.btn_back:
-                sendRequestData();
-                break;
-        }
-    }
+
 }

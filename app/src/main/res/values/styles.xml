@@ -71,7 +71,61 @@
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center</item>
     </style>
-
     <!--环信style 结束-->
 
+    <!--userinfo-->
+    <style name="user_info_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_16sp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:layout_marginLeft">@dimen/sidebar_text_size</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="user_info_text_v" parent="user_info_text">
+        <item name="android:maxLength">12</item>
+    </style>
+
+    <style name="user_info_imageview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:src">@mipmap/home_gerenziliao_jiantou</item>
+        <item name="android:layout_marginRight">@dimen/sidebar_text_size</item>
+    </style>
+    <!--end-->
+    <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+    <declare-styleable name="FlowLayout">
+        <attr name="horizontal_spacing" format="dimension" />
+        <attr name="vertical_spacing" format="dimension" />
+    </declare-styleable>
+    <!-- 老师详细样式-->
+
+    <style name="teacher_details">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:paddingBottom">@dimen/margin_10dp</item>
+        <item name="android:paddingTop">@dimen/margin_10dp</item>
+        <item name="android:textColor">@color/text_show_8b</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginLeft">23dp</item>
+    </style>
+
+    <style name="teacher_details_value">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/margin_10dp</item>
+        <item name="android:paddingTop">@dimen/margin_10dp</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    <style name="AppCompatTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+    </style>
 </resources>

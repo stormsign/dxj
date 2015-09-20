@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_content"
     android:orientation="vertical">
 
     <com.dxj.student.widget.TitleNavBar
-        android:id="@+id/tnb"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -20,9 +21,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="1dp">
 
@@ -32,13 +34,8 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="用户头像"
-                        android:layout_marginLeft="@dimen/sidebar_text_size"
-                        />
+                        style="@style/user_info_text_v"
+                        android:text="用户头像" />
 
                     <ImageView
                         android:id="@+id/avatar"
@@ -51,7 +48,7 @@
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -63,21 +60,23 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="昵称" />
 
                     <TextView
                         android:id="@+id/tv_nicename"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/img_nicename"
                         android:text="你是谁" />
+
+                    <ImageView
+                        android:id="@+id/img_nicename"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -89,20 +88,22 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="电话号码" />
 
                     <TextView
                         android:id="@+id/tv_mobile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/img_mobile" />
+
+                    <ImageView
+                        android:id="@+id/img_mobile"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -114,20 +115,22 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="角色" />
 
                     <TextView
                         android:id="@+id/tv_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/img_type" />
+
+                    <ImageView
+                        android:id="@+id/img_type"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -139,20 +142,22 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="真是姓名" />
 
                     <TextView
                         android:id="@+id/tv_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_toLeftOf="@+id/img_name" />
+
+                    <ImageView
+                        android:id="@+id/img_name"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -164,20 +169,22 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="性别" />
 
                     <TextView
                         android:id="@+id/tv_sex"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_toLeftOf="@+id/img_sex" />
+
+                    <ImageView
+                        android:id="@+id/img_sex"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -189,20 +196,22 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="星座" />
 
                     <TextView
                         android:id="@+id/tv_constellation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_toLeftOf="@+id/img_constellation" />
+
+                    <ImageView
+                        android:id="@+id/img_constellation"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -214,20 +223,22 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="年级" />
 
                     <TextView
                         android:id="@+id/tv_grade"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_toLeftOf="@+id/img_grade" />
+
+                    <ImageView
+                        android:id="@+id/img_grade"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -239,20 +250,22 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="学习证" />
 
                     <TextView
                         android:id="@+id/tv_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_toLeftOf="@+id/img_card" />
+
+                    <ImageView
+                        android:id="@+id/img_card"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="0dp"
@@ -264,16 +277,18 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
                         android:text="照片" />
 
                     <TextView
                         android:id="@+id/tv_images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_toLeftOf="@+id/img_images" />
+
+                    <ImageView
+                        android:id="@+id/img_images"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
@@ -289,16 +304,19 @@
                     android:layout_height="@dimen/linear_60dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        style="@style/user_info_text_v"
+
                         android:text="现居地" />
 
                     <TextView
                         android:id="@+id/tv_livingcity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        style="@style/user_info_text_v"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_toLeftOf="@+id/img_livingcity" />
+
+                    <ImageView
+                        android:id="@+id/img_livingcity"
+                        style="@style/user_info_imageview" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>

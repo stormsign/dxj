@@ -28,7 +28,7 @@ public class UserBean extends BaseBean implements Serializable{
         private String mobile;//手机
         private String horoscope;//星座
         private String grade;//年级
-        private List<String> images = new ArrayList<String>();
+        private ArrayList<String> images = new ArrayList<>();
         private String school;//学校
         private String livingCity;//现居城市
 //        private String card;//学生证
@@ -53,7 +53,7 @@ public class UserBean extends BaseBean implements Serializable{
             this.id = id;
         }
 
-        public void setImages(List<String> images) {
+        public void setImages(ArrayList<String> images) {
             this.images = images;
         }
 
@@ -85,7 +85,7 @@ public class UserBean extends BaseBean implements Serializable{
             this.type = type;
         }
 
-        public List<String> getImages() {
+        public ArrayList<String> getImages() {
             return images;
         }
 

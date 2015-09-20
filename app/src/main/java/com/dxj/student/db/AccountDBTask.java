@@ -5,8 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
+import com.dxj.student.bean.HeadUrl;
 import com.dxj.student.bean.UserBean;
 import com.dxj.student.utils.StringUtils;
+import com.google.gson.Gson;
 
 
 /**
@@ -45,20 +47,12 @@ public class AccountDBTask {
 	    values.put(AccountTable.SET, userBean.getUserInfo().getSex());
 	    values.put(AccountTable.SCHOOL, userBean.getUserInfo().getSchool());
 	    values.put(AccountTable.NAME, userBean.getUserInfo().getName());
+		//保存相册地址
+		HeadUrl headUrl = new HeadUrl();
+		headUrl.setImages(userBean.getUserInfo().getImages());
+		String jsonPhoto = new Gson().toJson(headUrl);
+		values.put(AccountTable.PHOTO, jsonPhoto);
 
-//		if (userBean.getUserInfo().getSolveLabel() != null && userBean.getUserInfo().getSolveLabel().size() > 0) {
-//			StringBuffer strBuffer = new StringBuffer();
-//			for (int i = 0; i <userBean.getUserInfo().getSolveLabel().size(); i++) {
-//				if (i != userBean.getUserInfo().getSolveLabel().size() - 1) {
-//					strBuffer.append(userBean.getUserInfo().getSolveLabel().get(i)).append(",");
-//				} else {
-//					strBuffer.append(userBean.getUserInfo().getSolveLabel().get(i));
-//				}
-//			}
-//			Log.i("TAG", "strBuffer=" + strBuffer.toString());
-//			values.put(AccountTable.SOLVELABEL, strBuffer.toString());
-//
-//		}
 	    getWsd().insert(AccountTable.TABLE_NAME, null, values);
 	}
 
@@ -116,6 +110,11 @@ public class AccountDBTask {
 
 		colid = c.getColumnIndex(AccountTable.NAME);
 		userinfo.setName(c.getString(colid));
+		colid = c.getColumnIndex(AccountTable.PHOTO);
+		String photoJson = c.getString(colid);
+		Gson gsonPhoto = new Gson();
+		HeadUrl headUrl = gsonPhoto.fromJson(photoJson, HeadUrl.class);
+		userinfo.setImages(headUrl.getImages());
 //		colid = c.getColumnIndex(AccountTable.TYPE);
 //		if (c.getString(colid)!=null)
 //		userinfo.setType(Long.valueOf(c.getString(colid)));
@@ -146,7 +145,16 @@ public class AccountDBTask {
 			getWsd().update(AccountTable.TABLE_NAME, values, AccountTable.ID + "=?", whereArgs);
 		}
 	}
-
+	public static void updatePhoto(String uid, HeadUrl photoList, String bigLetter) {
+		if (getWsd().isOpen()) {
+			ContentValues values = new ContentValues();
+			Gson gson = new Gson();
+			String photoJson = gson.toJson(photoList);
+			values.put(bigLetter, photoJson);
+			String[] whereArgs = {uid};
+			getWsd().update(AccountTable.TABLE_NAME, values, AccountTable.ID + "=?", whereArgs);
+		}
+	}
     public static void clear() {
 	String sql = "delete from " + AccountTable.TABLE_NAME;
 

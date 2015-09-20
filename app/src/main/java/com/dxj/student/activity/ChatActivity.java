@@ -1588,6 +1588,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		finish();
 	}
 
+	@Override
+	public void initTitle() {
+
+	}
+
 	/**
 	 * 覆盖手机返回键
 	 */

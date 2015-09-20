@@ -216,7 +216,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void loginHuanXin(final String mobile) {
-        EMChatManager.getInstance().login("teacher" + mobile, "1234456", new EMCallBack() {//回调
+        EMChatManager.getInstance().login("student" + mobile, "1234456", new EMCallBack() {//回调
             @Override
             public void onSuccess() {
                 Log.i("TAG", "loginHuanXin");

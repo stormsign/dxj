@@ -73,6 +73,11 @@ public class ContextMenu extends BaseActivity {
 	}
 
 	@Override
+	public void initTitle() {
+
+	}
+
+	@Override
 	public void initView() {
 
 	}

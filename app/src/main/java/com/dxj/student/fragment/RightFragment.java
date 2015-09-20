@@ -72,60 +72,60 @@ public class RightFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void initData() {
 //        List<String>
-        SMSSDK.initSDK(context, MyUtils.SMSSDK_APP_KEY, MyUtils.SMSSDK_APP_SECRET);
-        eventHandler = new EventHandler() {
-            @Override
-            public void onRegister() {
-                super.onRegister();
-            }
-
-            @Override
-            public void onUnregister() {
-                super.onUnregister();
-            }
-
-            @Override
-            public void beforeEvent(int i, Object o) {
-                super.beforeEvent(i, o);
-            }
-
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                if (result == SMSSDK.RESULT_COMPLETE) {
-                    //回调完成
-                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                        //提交验证码成功
-                        Map<String, Object> map = (HashMap<String, Object>) data;
-//                        LogUtils.w("EVENT_SUBMIT_VERIFICATION_CODE " + map.toString());
-                        String urlPath = FinalData.URL_VALUE + HttpUtils.RIGISTER;
-                        Map<String, Object> maps = new HashMap<>();
-                        maps.put("mobile", etPhone.getText().toString().trim());
-                        try {
-
-                            maps.put("plainPassword", AesUtil.Encrypt(password, AesUtil.cKey));
-                        } catch (Exception e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        GsonRequest<BaseBean> custom = new GsonRequest<>(Request.Method.POST, urlPath, BaseBean.class, maps, getVerifyListener(1), getVerifyErrorListener(1));
-                        VolleySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(custom);
-                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                        //获取验证码成功
-                        isMsg = true;
-                        LogUtils.w("get code success");
-                    } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
-                        //返回支持发送验证码的国家列表
-                        ArrayList<HashMap<String, Object>> countryList = (ArrayList<HashMap<String, Object>>) data;
-                        LogUtils.d("countryList = " + countryList.toString());
-                    }
-                } else {
-                    ((Throwable) data).printStackTrace();
-                }
-            }
-        };
-        SMSSDK.registerEventHandler(eventHandler);
-
-        SMSSDK.getSupportedCountries();
+//        SMSSDK.initSDK(context, MyUtils.SMSSDK_APP_KEY, MyUtils.SMSSDK_APP_SECRET);
+//        eventHandler = new EventHandler() {
+//            @Override
+//            public void onRegister() {
+//                super.onRegister();
+//            }
+//
+//            @Override
+//            public void onUnregister() {
+//                super.onUnregister();
+//            }
+//
+//            @Override
+//            public void beforeEvent(int i, Object o) {
+//                super.beforeEvent(i, o);
+//            }
+//
+//            @Override
+//            public void afterEvent(int event, int result, Object data) {
+//                if (result == SMSSDK.RESULT_COMPLETE) {
+//                    //回调完成
+//                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+//                        //提交验证码成功
+//                        Map<String, Object> map = (HashMap<String, Object>) data;
+////                        LogUtils.w("EVENT_SUBMIT_VERIFICATION_CODE " + map.toString());
+//                        String urlPath = FinalData.URL_VALUE + HttpUtils.RIGISTER;
+//                        Map<String, Object> maps = new HashMap<>();
+//                        maps.put("mobile", etPhone.getText().toString().trim());
+//                        try {
+//
+//                            maps.put("plainPassword", AesUtil.Encrypt(password, AesUtil.cKey));
+//                        } catch (Exception e) {
+//                            // TODO Auto-generated catch block
+//                            e.printStackTrace();
+//                        }
+//                        GsonRequest<BaseBean> custom = new GsonRequest<>(Request.Method.POST, urlPath, BaseBean.class, maps, getVerifyListener(1), getVerifyErrorListener(1));
+//                        VolleySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(custom);
+//                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+//                        //获取验证码成功
+//                        isMsg = true;
+//                        LogUtils.w("get code success");
+//                    } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
+//                        //返回支持发送验证码的国家列表
+//                        ArrayList<HashMap<String, Object>> countryList = (ArrayList<HashMap<String, Object>>) data;
+//                        LogUtils.d("countryList = " + countryList.toString());
+//                    }
+//                } else {
+//                    ((Throwable) data).printStackTrace();
+//                }
+//            }
+//        };
+//        SMSSDK.registerEventHandler(eventHandler);
+//
+//        SMSSDK.getSupportedCountries();
     }
 
     @Override

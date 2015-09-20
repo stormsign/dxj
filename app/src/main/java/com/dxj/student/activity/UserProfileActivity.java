@@ -52,7 +52,12 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 		initView();
 		initListener();
 	}
-	
+
+	@Override
+	public void initTitle() {
+
+	}
+
 	public void initView() {
 		headAvatar = (ImageView) findViewById(R.id.user_head_avatar);
 		headPhotoUpdate = (ImageView) findViewById(R.id.user_head_headphoto_update);

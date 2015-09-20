@@ -69,6 +69,11 @@ public class ShowVideoActivity extends BaseActivity {
 	}
 
 	@Override
+	public void initTitle() {
+
+	}
+
+	@Override
 	public void initView() {
 
 	}

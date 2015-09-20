@@ -21,6 +21,7 @@ public class AccountTable {
     public static final String SCHOOL="school";//学校
     public static final String LIVINGCITY="livingCity";//现居城市
     public static final String NAME="name";//真是姓名
+    public static final String PHOTO="photo";//相册
 
     //        private String grade;//年级
 //    public static final String JSZ="jsz";//教师证

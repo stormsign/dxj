@@ -31,7 +31,11 @@
     <color name="azure">#f0ffff</color>
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="rbuttonNo">#8a8a8a</color>
-
+    <!--老师详细-->
+    <color name="text_tab_details">#ffff704b</color>
+    <color name="text_subject_details">#ffa9a9a9</color>
+    <color name="text_bg_details">#ffDEDEDE</color>
+    <color name="text_labe_details">#ff797979</color>
     <!--环信颜色 开始-->
 
     <color name="common_top_bar_blue">#4ebcd3</color>
@@ -69,6 +73,7 @@
     <color name="black_deep">#FF000000</color>
     <color name="btn_answer_pressed">#4ebcd3</color>
     <color name="btn_answer_normal">#2dafa3</color>
+    <color name="blue_button">#7adeff</color>
 
     <!--环信颜色 结束-->
 </resources>

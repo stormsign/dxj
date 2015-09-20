@@ -51,6 +51,11 @@ public class CallActivity extends BaseActivity {
     }
 
     @Override
+    public void initTitle() {
+
+    }
+
+    @Override
     public void initView() {
 
     }

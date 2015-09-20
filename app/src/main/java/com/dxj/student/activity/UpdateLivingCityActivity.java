@@ -23,18 +23,19 @@ import com.dxj.student.http.VolleySingleton;
 import com.dxj.student.utils.HttpUtils;
 import com.dxj.student.utils.StringUtils;
 import com.dxj.student.utils.ToastUtils;
+import com.dxj.student.widget.TitleNavBar;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by kings on 8/27/2015.
- * 别名
+ * 家庭地址
  */
 public class UpdateLivingCityActivity extends BaseActivity implements View.OnClickListener {
-    private ImageButton btnNiceName;
-    private EditText etNiceName;
-    private String strNiceName;
+    private EditText etLivingCity;
+    private String id;
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,41 @@ public class UpdateLivingCityActivity extends BaseActivity implements View.OnCli
         setContentView(R.layout.activity_update_nicename);
         initData();
         initView();
+        initTitle();
+    }
+
+    @Override
+    public void initTitle() {
+        TitleNavBar title = (TitleNavBar) findViewById(R.id.title);
+        title.disableBack(true);
+        title.setTitle("家庭地址");
+        title.setTitleNoRightButton();
+        title.setOnTitleNavClickListener(new TitleNavBar.OnTitleNavClickListener() {
+            @Override
+            public void onNavOneClick() {
+
+            }
+
+            @Override
+            public void onNavTwoClick() {
+
+            }
+
+            @Override
+            public void onNavThreeClick() {
+
+            }
+
+            @Override
+            public void onActionClick() {
+
+            }
+
+            @Override
+            public void onBackClick() {
+                sendRequestData();
+            }
+        });
     }
 
 //    @Override
@@ -51,14 +87,20 @@ public class UpdateLivingCityActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void initView() {
-        btnNiceName = (ImageButton) findViewById(R.id.btn_back);
-        etNiceName = (EditText) findViewById(R.id.et);
-        btnNiceName.setOnClickListener(this);
+        etLivingCity = (EditText) findViewById(R.id.et);
+        etLivingCity.setHint("家庭地址");
+//        if (StringUtils.isEmpty(address)) {
+//            etLivingCity.setText(MyApplication.getInstance().getLocationdescribe());
+//        } else {
+//            etLivingCity.setText(address);
+//
+//        }
     }
 
     @Override
     public void initData() {
-
+        id = getIntent().getStringExtra("id");
+        address = getIntent().getStringExtra("address");
     }
 
 
@@ -73,15 +115,15 @@ public class UpdateLivingCityActivity extends BaseActivity implements View.OnCli
 //    }
 
     private void sendRequestData() {
-        strNiceName = etNiceName.getText().toString().trim();
-        if (StringUtils.isEmpty(strNiceName)) {
+        address = etLivingCity.getText().toString().trim();
+        if (StringUtils.isEmpty(address)) {
             finish();
             return;
         }
         String urlPath = FinalData.URL_VALUE + HttpUtils.LIVING_CITY;
         Map<String, Object> map = new HashMap<>();
-        map.put("id", "faf58cf0-c65e-4d53-b73e-ecea691a8dad");
-        map.put("livingCity", strNiceName);
+        map.put("id", id);
+        map.put("livingCity", address);
         CustomStringRequest custom = new CustomStringRequest(Request.Method.POST, urlPath, map, getListener(), getErrorListener());
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(custom);
     }
@@ -93,10 +135,10 @@ public class UpdateLivingCityActivity extends BaseActivity implements View.OnCli
                 Log.i("TAG", "str=" + str);
                 BaseBean message = JSONObject.parseObject(str, BaseBean.class);
                 if (message.getCode() == 0) {
-                    AccountDBTask.updateNickName(MyApplication.getInstance().getUserId(), strNiceName, AccountTable.LIVINGCITY);
+                    AccountDBTask.updateNickName(MyApplication.getInstance().getUserId(), address, AccountTable.LIVINGCITY);
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putString("livingCity", strNiceName);
+                    bundle.putString("livingCity", address);
                     intent.putExtras(bundle);
                     UpdateLivingCityActivity.this.setResult(RESULT_OK, intent);
                     finish();
