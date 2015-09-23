@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
+
     <style name="my_btn">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -14,6 +15,7 @@
         <item name="android:onClick">dialogShow</item>
         <item name="android:textSize">20sp</item>
     </style>
+
     <style name="DialogWindowTitle">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/text_color</item>
@@ -29,9 +31,11 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:backgroundDimAmount">0.4</item>
     </style>
+
     <style name="dialog_untran" parent="dialog_tran">
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
     <style name="dialog_btn">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -43,6 +47,25 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="big_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:background">@drawable/shape_round_corner_bluebutton</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="popwindow_anim_scale_slide">
+        <item name="android:windowEnterAnimation">@anim/popwindowshow</item>
+        <item name="android:windowExitAnimation">@anim/popwindowhide</item>
+    </style>
+    <style name="popwindow_anim_slide">
+        <item name="android:windowEnterAnimation">@anim/activity_translate_in</item>
+        <item name="android:windowExitAnimation">@anim/activity_translate_out</item>
+    </style>
 
     <!--环信style 开始-->
 
@@ -56,6 +79,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:background">@drawable/timestampe_bg</item>
     </style>
+
     <style name="chat_content_date_style">
         <item name="android:minHeight">50dp</item>
         <item name="android:gravity">center</item>
@@ -66,6 +90,7 @@
         <item name="android:focusable">true</item>
         <item name="android:background">#bfbfbf</item>
     </style>
+
     <style name="chat_text_name_style">
         <item name="android:textColor">#818181</item>
         <item name="android:textSize">15sp</item>
@@ -83,6 +108,7 @@
         <item name="android:layout_marginLeft">@dimen/sidebar_text_size</item>
         <item name="android:singleLine">true</item>
     </style>
+
     <style name="user_info_text_v" parent="user_info_text">
         <item name="android:maxLength">12</item>
     </style>
@@ -99,6 +125,7 @@
     <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/transparent</item>
     </style>
+
     <declare-styleable name="FlowLayout">
         <attr name="horizontal_spacing" format="dimension" />
         <attr name="vertical_spacing" format="dimension" />
@@ -125,6 +152,7 @@
         <item name="android:textSize">13sp</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
+
     <style name="AppCompatTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
     </style>

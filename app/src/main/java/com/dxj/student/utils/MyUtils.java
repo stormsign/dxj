@@ -1,13 +1,31 @@
 package com.dxj.student.utils;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.dxj.student.bean.StudyGroup;
+import com.dxj.student.bean.UserBean;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -20,9 +38,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -32,8 +56,208 @@ import java.util.zip.GZIPInputStream;
  * Created by khb on 2015/8/20.
  */
 public class MyUtils {
+
     public final static String SMSSDK_APP_KEY = "a38245d89da2";
     public final static String SMSSDK_APP_SECRET = "84db45a5b7dcde895fc72f47edf53447";
+    public static final String UMENG_MESSAGE_EXTRA = "extra";
+
+    public static void openActivityFromUmengMessage(Context context, String activity, Map<String, String> extra) {
+        if(activity != null && !TextUtils.isEmpty(activity.trim())) {
+            Intent intent = new Intent();
+            if (extra!=null) {
+//            实际情况下只传了一个参数
+                setIntentFromUmengExtra(intent, extra);
+            }
+            intent.setClassName(context, activity);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+    }
+
+    private static Intent setIntentFromUmengExtra(Intent intent, Map<String, String> extra) {
+        if(intent != null && extra != null) {
+            Iterator iterator = extra.entrySet().iterator();
+
+            while(iterator.hasNext()) {
+                Map.Entry entry = (Map.Entry)iterator.next();
+                String key = (String)entry.getKey();
+                String value = (String)entry.getValue();
+                if(key != null) {
+                    intent.putExtra(key, value);
+                }
+            }
+            return intent;
+        } else {
+            return intent;
+        }
+    }
+
+    public static Map<String, String> parseUmengExtra(String extra){
+        Map<String,String> m = new HashMap<String,String>();
+        if (extra != null) {
+            extra = extra.substring(1, extra.length() - 1);//去掉括号
+            String[] kvs = extra.split(",");//拆成key 和value 的组合
+            for (String kv : kvs) {
+                //拆成key 和value 分别放好
+                m.put(kv.substring(0, kv.indexOf('=')), kv.substring(kv.indexOf('=') + 1));
+            }
+        }
+        return m;
+    }
+
+    public static List<StudyGroup> getSecondListGroupsFromJson(String json, List<Integer> secondIdList){
+        try {
+            JSONObject jObject = new JSONObject(json);
+            List<StudyGroup> groupList = new ArrayList<>();
+            for (int secondId :
+                    secondIdList) {
+                if (jObject.has(secondId+"")) {
+                    JSONArray jGroupArray = (JSONArray) jObject.get(secondId + "");
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<ArrayList<StudyGroup>>() {}.getType();
+                    List<StudyGroup> groups = gson.fromJson(jGroupArray.toString(), type);
+                    groupList.addAll(groups);
+                }
+            }
+            return groupList;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static StudyGroup getGroupDetailFromJson(String json){
+
+        try {
+            JSONObject jObject = new JSONObject(json);
+            if (jObject.has("group")){
+                JSONObject jGroup = (JSONObject) jObject.get("group");
+                Gson gson = new Gson();
+                StudyGroup studyGroup = gson.fromJson(jGroup.toString(), StudyGroup.class);
+                return studyGroup;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+        }
+        return  null;
+    }
+
+    public static List<UserBean.UserInfo> getGroupMembersFromJson(StudyGroup group, String json){
+        List<String> members = new ArrayList<String>();
+        List<UserBean.UserInfo> groupMembers = new ArrayList<UserBean.UserInfo>();
+        try {
+            JSONObject jObject = new JSONObject(json);
+//            团长排在团员第一位
+            members.add(group.getOwner());
+            if (group.getMembers()!=null) {
+                members.addAll(group.getMembers());
+            }
+            for (int i = 0; i<members.size(); i++){
+                if (jObject.has(members.get(i))){
+                    JSONObject jUserInfo = (JSONObject) jObject.get(members.get(i));
+                    Gson gUserInfo = new Gson();
+                    UserBean.UserInfo userInfo = gUserInfo.fromJson(jUserInfo.toString(), UserBean.UserInfo.class);
+                    groupMembers.add(userInfo);
+                }
+            }
+            return groupMembers;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+    /**
+     * 根据手机号拼接老师环信账号
+     * @param mobile
+     * @return
+     */
+    public static String getTeacherHX(String mobile) {
+        return "teacher"+mobile;
+    }
+
+    /**
+     * 根据手机号拼接学生环信账号
+     * @param mobile
+     * @return
+     */
+    public static String getStudentHX(String mobile){
+        return "student"+mobile;
+    }
+
+
+    /**
+     * 判断是否是该团成员，包括团长
+     * @param teacherHX
+     * @param studyGroup
+     * @return
+     */
+    public static boolean isMember(String teacherHX, StudyGroup studyGroup) {
+        List<String> members =  studyGroup.getMembers();
+        if (members!=null && !members.isEmpty()){
+            return (!studyGroup.getOwner().equals(teacherHX) && !members.contains(teacherHX))?false:true;
+        }else{
+            return studyGroup.getOwner().equals(teacherHX);
+        }
+    }
+
+
+
+    /**
+     * 判断当前网络环境是否为wifi
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isWifiConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (ni.getState() == NetworkInfo.State.CONNECTED) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否有网络连接
+     * @param context
+     * @return
+     */
+    public static boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断MOBILE网络是否可用
+     * @param context
+     * @return
+     */
+    public static boolean isMobileConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mMobileNetworkInfo = mConnectivityManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+            if (mMobileNetworkInfo != null) {
+                return mMobileNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+
+
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
@@ -77,6 +301,7 @@ public class MyUtils {
         }
         return true;
     }
+
 
     /**
      * 对字符串进行MD5加密 输出：MD5加密后的大写16进制密文
@@ -266,6 +491,7 @@ public class MyUtils {
     }
 
     /**
+     *
      * 检测是否有emoji表情
      *
      * @param source
@@ -338,7 +564,7 @@ public class MyUtils {
 
         // Log.i("TAG", "calculateInSampleSize=" + calculateInSampleSize(bmOptions, 300, 600));
         // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inSampleSize = calculateInSampleSize(bmOptions, 300, 600);
+        bmOptions.inSampleSize = calculateInSampleSize(bmOptions, 600, 600);
         bmOptions.inJustDecodeBounds = false;
         // bmOptions.inPurgeable = true;
         // BitmapFactory.Options options = new BitmapFactory.Options();
@@ -394,6 +620,7 @@ public class MyUtils {
         try {
             File file = new File(filePath);
             fis = new FileInputStream(file);
+
             bitmap = BitmapFactory.decodeStream(fis, null, opts);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -449,5 +676,38 @@ public class MyUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
+    }
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public static void recycleViewGroupAndChildViews(ViewGroup viewGroup, boolean recycleBitmap) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+
+            View child = viewGroup.getChildAt(i);
+
+            if (child instanceof ViewGroup) {
+                recycleViewGroupAndChildViews((ViewGroup) child, true);
+                continue;
+            }
+
+            if (child instanceof ImageView) {
+                Log.i("TAG", "ImageView");
+                ImageView iv = (ImageView) child;
+                Drawable drawable = iv.getDrawable();
+                if (drawable instanceof BitmapDrawable) {
+                    BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    if (recycleBitmap && bitmap != null) {
+                        bitmap.recycle();
+                    }
+                }
+                iv.setImageBitmap(null);
+                iv.setBackground(null);
+                continue;
+            }
+
+            child.setBackground(null);
+
+        }
+
+        viewGroup.setBackground(null);
     }
 }

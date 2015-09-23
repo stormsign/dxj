@@ -12,9 +12,9 @@ import java.util.List;
  */
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
-    private List<T> mList;
-    private Activity mContext;
-    private LayoutInflater mLayoutInflater;
+    public List<T> mList;
+    public Activity mContext;
+    public LayoutInflater mLayoutInflater;
 
     public BaseRecyclerViewAdapter(Activity mContext, List<T> mList){
         this.mContext = mContext;

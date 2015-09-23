@@ -194,10 +194,27 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.CoursesActivity" />
+        <activity android:name=".activity.StudyGroupListActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity android:name=".activity.CreateStudyGroupActivity"/>
+        <activity android:name=".activity.SubjectListActivity"/>
+        <activity android:name=".activity.StudyGroupDetailActivity"/>
+        <activity android:name=".activity.GroupSettingActivity"/>
+        <activity android:name=".activity.GroupNoticeActivity"/>
+        <!--<activity android:name=".activity.CreateNoticeActivity"/>-->
+        <activity android:name=".activity.GroupMemberListActivity"/>
+        <!--<activity android:name=".activity.MoreGroupsActivity"/>-->
+        <activity android:name=".activity.GroupSearchActivity"/>
+        <activity android:name=".activity.NotificationsActivity"/>
+        <!--<activity android:name=".activity.BrowserActivity"/>-->
+
+
         <activity android:name=".activity.MultiImageSelectorActivity" />
         <activity android:name=".activity.NiftyActivity" />
         <activity android:name=".activity.UpdateImageActivity" />
-        <activity android:name=".activity.ChatActivity" />
+        <activity android:name=".activity.ChatActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".activity.AlertDialog" />
         <activity android:name=".activity.CallActivity" />
         <activity android:name=".activity.ContextMenu" />

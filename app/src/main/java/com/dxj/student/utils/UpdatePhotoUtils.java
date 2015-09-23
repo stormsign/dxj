@@ -22,6 +22,11 @@ import java.util.Date;
  * Created by kings on 9/2/2015.
  */
 public class UpdatePhotoUtils {
+
+    public static final int TAKE_PICTURE = 16;// 拍照
+    public static final int RESULT_LOAD_IMAGE = 17;// 从相册中选择
+    public static final int CUT_PHOTO_REQUEST_CODE = 18;
+
     //上传图片的第一步 从系统相册选择图片
     public static void startPhotoZoom(Activity activity) {
         Intent intent;
@@ -72,6 +77,32 @@ public class UpdatePhotoUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static void startPhotoZoomOne(Uri uri, Activity activity, String address) {
+        Log.i("TAG","startPhotoZoomOne");
+        Log.i("TAG","address="+address);
+        Uri imageUri = Uri.parse("file:///sdcard/formats/" + address + ".JPEG");
+
+        final Intent intent = new Intent("com.android.camera.action.CROP");
+        // Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        // 照片URL地址
+        intent.setDataAndType(uri, "image/*");
+
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 2);
+        intent.putExtra("aspectY", 2);
+        intent.putExtra("outputX", 200);
+        intent.putExtra("outputY", 200);
+        // 输出路径
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        // 输出格式
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        // 不启用人脸识别
+        intent.putExtra("noFaceDetection", false);
+        intent.putExtra("return-data", false);
+        activity.startActivityForResult(intent, UpdateUserInfoActivity.CUT_PHOTO_REQUEST_CODE);
 
     }
 

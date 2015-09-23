@@ -362,4 +362,10 @@
     <string name="edit_search">输入老师手机号或学团名称</string>
     <string name="error_msg">啊哦，出问题了，待会再来试试吧</string>
     <string name="system_notice">系统通知</string>
+    <string name="loading">加载中</string>
+    <string name="bt_discovery">发现</string>
+    <string name="leader_is_very_very_lazy">团长很懒，什么也没写</string>
+    <string name="no_network">网络不流畅</string>
+    <string name="no_network_sub">检查一下手机联网情况吧</string>
+    <string name="reload">重新加载</string>
 </resources>

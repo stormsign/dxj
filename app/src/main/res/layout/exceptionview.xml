@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_content">
+
+
+
+
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/network_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<-->
+
+        <!--</RelativeLayout>-->
+
+    <RelativeLayout
+        android:id="@+id/empty_view"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_empty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/text_color_646464"
+            android:textSize="@dimen/text_16sp" />
+
+        <ImageView
+            android:id="@+id/exception_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_empty_text"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="@dimen/padding_16dp"
+            android:src="@mipmap/teshu_ico_hezi" />
+
+        <TextView
+            android:id="@+id/tv_empty_subtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_empty_text"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:paddingTop="@dimen/padding_8dp"
+            android:textColor="@color/text_color_a4a4a4"
+            android:textSize="@dimen/text_14sp" />
+
+        <TextView
+            android:id="@+id/empty_action"
+            android:layout_width="128dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_empty_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/selector_empty_action"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:textColor="@color/text_color_646464"
+            android:textSize="@dimen/text_15sp"
+            android:visibility="visible" />
+    </RelativeLayout>
+</RelativeLayout>

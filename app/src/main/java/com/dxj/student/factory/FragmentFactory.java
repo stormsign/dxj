@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.dxj.student.base.BaseFragment;
 import com.dxj.student.fragment.HomeFragment;
+import com.dxj.student.fragment.MessageFragment;
 import com.dxj.student.fragment.MyFragment;
 
 import java.util.HashMap;
@@ -25,8 +26,10 @@ public class FragmentFactory {
                     baseFragment = new HomeFragment();
                     break;
                 case 1: //找老师
+//                    baseFragment = new FindFragment();
                     break;
                 case 2: //消息
+                    baseFragment = new MessageFragment();
                     break;
                 case 3: //我
                     baseFragment = new MyFragment();

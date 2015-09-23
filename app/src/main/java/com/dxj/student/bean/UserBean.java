@@ -2,7 +2,6 @@ package com.dxj.student.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 图片实体
@@ -18,7 +17,7 @@ public class UserBean extends BaseBean implements Serializable{
         return userInfo;
     }
 
-    public class UserInfo{
+    public class UserInfo implements Serializable{
        private String id; //用户id
         private String nickName;//用户昵称
         private String headUrl;//头像
