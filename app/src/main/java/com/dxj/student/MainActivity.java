@@ -1,5 +1,6 @@
 package com.dxj.student;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.dxj.student.activity.ChatActivity;
 import com.dxj.student.activity.LoginAndRightActivity;
 import com.dxj.student.activity.UpdateImageActivity;
 import com.dxj.student.application.MyApplication;
 import com.dxj.student.base.BaseActivity;
 import com.dxj.student.factory.FragmentFactory;
+import com.dxj.student.fragment.HomeFragment;
+import com.dxj.student.fragment.MyFragment;
 import com.dxj.student.utils.SPUtils;
 import com.easemob.EMCallBack;
 import com.easemob.applib.controller.HXSDKHelper;
@@ -42,11 +47,21 @@ public class MainActivity extends BaseActivity {
 
     private Button bt_user, bt_message, bt_search, bt_home;
     private FragmentManager fm;
+    private android.support.v4.app.FragmentTransaction ft;
     private Context context = this;
     private PushAgent mPushAgent;
+    private final static int HOME = 0;
+    private final static int LOOKINGFORTEACHER = 1;
+    private final static int MESSAGE = 2;
+    private final static int MYINFO = 3;
     private static final String DBNAME = "subject.db";
     private static final String SCHOOL = "t_city.db";
     private static final String TEACHER_TYPE = "t_teacher_role.db";
+    private LocationClient mLocationClient;
+    private Button startLocation;
+    private LocationClientOption.LocationMode tempMode = LocationClientOption.LocationMode.Hight_Accuracy;
+    private String tempcoor = "gcj02";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +84,10 @@ public class MainActivity extends BaseActivity {
         bt_search = (Button) findViewById(R.id.bt_search);
         bt_message = (Button) findViewById(R.id.bt_message);
         bt_user = (Button) findViewById(R.id.bt_user);
-        showLogD("==============================================");
+        ft = fm.beginTransaction();
+        ft.add(R.id.rl_fragment_contanier, (HomeFragment) FragmentFactory.getFragment(HOME), "HOME")
+                .add(R.id.rl_fragment_contanier, (MyFragment) FragmentFactory.getFragment(MYINFO)).hide((MyFragment) FragmentFactory.getFragment(MYINFO));
+        ft.show((HomeFragment) FragmentFactory.getFragment(HOME)).commit();
     }
 
     @Override
@@ -85,9 +103,29 @@ public class MainActivity extends BaseActivity {
         copyDB(DBNAME);
         copyDB(SCHOOL);
         copyDB(TEACHER_TYPE);
+        initLocation();
+        mLocationClient.start();
 
 
     }
+
+    private void initLocation() {
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(tempMode);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+        option.setCoorType(tempcoor);//可选，默认gcj02，设置返回的定位结果坐标系，
+
+
+        option.setScanSpan(0);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
+        option.setOpenGps(true);//可选，默认false,设置是否使用gps
+        option.setLocationNotify(true);//可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
+        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤gps仿真结果，默认需要
+        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
+        option.setIsNeedLocationPoiList(false);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
+        mLocationClient.setLocOption(option);
+    }
+
     /**
      * 把apk中的数据库复制到手机内存
      *
@@ -140,17 +178,22 @@ public class MainActivity extends BaseActivity {
     public void showFragment(View v) {
         switch (v.getId()) {
             case R.id.bt_home:
-                Toast.makeText(context, "HOME", Toast.LENGTH_SHORT).show();
                 fm.beginTransaction()
-                        .replace(R.id.rl_fragment_contanier, FragmentFactory.getFragment(0), "HOME")
+//                        .hide(FragmentFactory.getFragment(MESSAGE))
+//                        .hide(FragmentFactory.getFragment(LOOKINGFORTEACHER))
+                        .hide(FragmentFactory.getFragment(MYINFO))
+                        .show(FragmentFactory.getFragment(HOME))
                         .commit();
                 break;
             case R.id.bt_search:
                 Toast.makeText(context, "SEARCH", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bt_user:
-                Intent intent = new Intent(this, LoginAndRightActivity.class);
-                startActivity(intent);
+                fm.beginTransaction()
+                        .hide(FragmentFactory.getFragment(HOME))
+//                        .hide(FragmentFactory.getFragment(MESSAGE)).hide(FragmentFactory.getFragment(LOOKINGFORTEACHER))
+                        .show(FragmentFactory.getFragment(MYINFO))
+                        .commit();
                 break;
             case R.id.bt_message:
                 Intent intentMulti = new Intent(this, UpdateImageActivity.class);

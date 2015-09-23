@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.dxj.student.base.BaseFragment;
 import com.dxj.student.fragment.HomeFragment;
+import com.dxj.student.fragment.MyFragment;
 
 import java.util.HashMap;
 
@@ -28,6 +29,7 @@ public class FragmentFactory {
                 case 2: //消息
                     break;
                 case 3: //我
+                    baseFragment = new MyFragment();
                     break;
             }
             hashMap.put(position, baseFragment);

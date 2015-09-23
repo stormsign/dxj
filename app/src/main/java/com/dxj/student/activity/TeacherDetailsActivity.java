@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ import java.util.Random;
  * Created by kings on 9/8/2015.
  * 老师详情
  */
-public class TeacherDetailsActivity extends AppCompatActivity implements DetailFragment.OnPhotoClick {
+public class TeacherDetailsActivity extends AppCompatActivity implements DetailFragment.OnPhotoClick,View.OnClickListener{
     private RadioGroup radioGroup;
     private Fragment[] fragments;
     private int currentTabIndex = 0;
@@ -55,6 +56,10 @@ public class TeacherDetailsActivity extends AppCompatActivity implements DetailF
     private Toolbar mToolbar;//
     private CollapsingToolbarLayout mCollapsingToolbarLayout;//
     private AppBarLayout appbar;//
+    //底部按钮
+    private LinearLayout linearCollect;//收藏
+//    private AppBarLayout appbar;
+//    private AppBarLayout appbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,7 @@ public class TeacherDetailsActivity extends AppCompatActivity implements DetailF
                 TeacherDetailsActivity.this.onBackPressed();
             }
         });
+        linearCollect =(LinearLayout)findViewById(R.id.linear_collect);
         radioGroup = (RadioGroup) this.findViewById(R.id.radio_group);
         tvName = (TextView) findViewById(R.id.tv_name);
         imgAvatar = (ImageView) findViewById(R.id.img_avatar);
@@ -95,6 +101,8 @@ public class TeacherDetailsActivity extends AppCompatActivity implements DetailF
         radioButtonPhoto = (RadioButton) findViewById(R.id.list_holder_radio_button);
         radioButtonHome = (RadioButton) findViewById(R.id.basic_holder_radio_button);
         radioButtonCourse = (RadioButton) findViewById(R.id.grid_holder_radio_button);
+        //
+        linearCollect.setOnClickListener(this);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -115,6 +123,11 @@ public class TeacherDetailsActivity extends AppCompatActivity implements DetailF
         });
     }
 
+    /**
+     * 随机显示背景图片
+     * @param i
+     * @param appbar
+     */
     private void ranSwitch(int i, AppBarLayout appbar) {
         Log.i("TAG", "i=" + i);
         int mipmap = 0;
@@ -309,6 +322,16 @@ public class TeacherDetailsActivity extends AppCompatActivity implements DetailF
         } else if (index == DetailFragment.PHOTO) {
             radioButtonPhoto.setChecked(true);
             showFragment(1);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id =v.getId();
+        switch (id){
+            case R.id.linear_collect:
+
+                break;
         }
     }
 }

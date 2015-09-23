@@ -29,7 +29,6 @@ import com.dxj.student.utils.HttpUtils;
 import com.dxj.student.utils.MyUtils;
 import com.dxj.student.widget.FlowLayout;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +56,10 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     private LinearLayout linearSubject;
     private TeacherInfoBean teacher;
     private TextView tvPhoto;//点击进入相册页面
+    private TextView tvCourseTitle;//科目标题 没鸟用 ，当没有课程的时候隐藏
+    private TextView tvStudyTitle;// 学团同上
+    private TextView tvExperienceTitle;//经验 同上
+    private TextView tvResultTitle;//成果 同上
 
     @Override
     public void initData() {
@@ -69,11 +72,8 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     @Override
     public View initView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.activity_home_details, null);
-//        tvName = (TextView) view.findViewById(R.id.tv_name);
         tvAddressValue = (TextView) view.findViewById(R.id.tv_address_value);
         tvConstellation = (TextView) view.findViewById(R.id.tv_constellation_value);
-//        imgAvatar = (ImageView) view.findViewById(R.id.img_avatar);
-//        tvRecomment = (TextView) view.findViewById(R.id.tv_recomment);
         tvTeachAge = (TextView) view.findViewById(R.id.tv_teachage_value);
         tvMajor = (TextView) view.findViewById(R.id.tv_major_value);
         tvTeachCity = (TextView) view.findViewById(R.id.tv_teach_city_value);
@@ -86,6 +86,9 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         alreadyFlowlayout = (FlowLayout) view.findViewById(R.id.already_flowlayout);
         flowlayoutSolveLabel = (FlowLayout) view.findViewById(R.id.flowlayout_solve_label);
         tvPhoto = (TextView) view.findViewById(R.id.tv_photo);
+        //没什么用的控件
+        tvCourseTitle = (TextView) view.findViewById(R.id.tv_course_title);
+        tvStudyTitle = (TextView) view.findViewById(R.id.tv_study_title);
         tvPhoto.setOnClickListener(this);
 //        sendRequestData();
         return view;
@@ -123,19 +126,29 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
     }
 
     private void fillUi(TeacherUserBean.UserInfo userInfo) {
-//        tvName.setText(userInfo.getNickName());
-//        Glide.with(getActivity()).load(userInfo.getHeadUrl()).centerCrop().into(imgAvatar);
-//        tvRecomment.setText(userInfo.getRemark());
-        tvAddressValue.setText(userInfo.getLivingCity());
-        tvConstellation.setText(userInfo.getHoroscope());
-        tvSchool.setText(userInfo.getSchool());
+        if (userInfo.getLivingCity() != null)
+            tvAddressValue.setText(userInfo.getLivingCity());
+        if (userInfo.getHoroscope() != null)
+            tvConstellation.setText(userInfo.getHoroscope());
+        if (userInfo.getSchool() != null)
+            tvSchool.setText(userInfo.getSchool());
         tvTeachAge.setText(userInfo.getSchoolAge() + "年");
-        tvMajor.setText(userInfo.getMajor());
-        tvTeachCity.setText(userInfo.getLivingCity());
-        tvExperience.setText(userInfo.getExperience());
-        tvResult.setText(userInfo.getResult());
-//        if (userInfo.get)
-//        tvTeachType.setText(user);
+        if (userInfo.getMobile() != null)
+            tvMajor.setText(userInfo.getMajor());
+        if (userInfo.getLivingCity() != null)
+            tvTeachCity.setText(userInfo.getLivingCity());
+        if (userInfo.getExperience() != null)
+            tvExperience.setText(userInfo.getExperience());
+        else {
+            tvExperience.setVisibility(View.GONE);
+            tvExperienceTitle.setVisibility(View.GONE);
+        }
+        if (userInfo.getResult() != null)
+            tvResult.setText(userInfo.getResult());
+        else {
+            tvResult.setVisibility(View.GONE);
+            tvResultTitle.setVisibility(View.GONE);
+        }
         addChildTo(userInfo.getLabel());
         addChildToTwo(userInfo.getSolveLabel());
         showPhoto(userInfo.getImages());
@@ -148,6 +161,9 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
      * @param list
      */
     private void addStude(ArrayList<StudyGroup> list) {
+        if (list.size() == 0) {
+            tvStudyTitle.setVisibility(View.GONE);
+        }
         for (int i = 0; i < list.size(); i++) {
             View view = getActivity().getLayoutInflater().inflate(R.layout.item_detail_group, null);
             ImageView groupHead = (ImageView) view.findViewById(R.id.group_head);
@@ -253,8 +269,13 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
+    /**
+     * 只显示四张
+     *
+     * @param lists
+     */
     private void showPhoto(List<String> lists) {
-        if (lists != null && lists.size() > 0) {
+        if (lists != null && lists.size() >= 0) {
             int count = lists.size();
             if (count > 4) {
                 count = 4;
@@ -270,6 +291,7 @@ public class DetailFragment extends BaseFragment implements View.OnClickListener
                 switch (count) {
                     case 0:
                         linearPhoto.setVisibility(View.GONE);
+                        tvPhoto.setVisibility(View.GONE);
                         break;
                     case 1:
                         for (int i = 3; i > 0; i--) {

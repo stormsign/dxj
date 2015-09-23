@@ -13,10 +13,11 @@ import com.dxj.student.activity.UpdateUserInfoActivity;
 import com.dxj.student.base.BaseFragment;
 
 
-/**首页
+/**
+ * 首页
  * Created by khb on 2015/8/19.
  */
-public class HomeFragment extends BaseFragment implements View.OnClickListener{
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initData() {
@@ -26,18 +27,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public View initView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_home, null);
-      view.findViewById(R.id.userinfo).setOnClickListener(this);
-      view.findViewById(R.id.btn_login).setOnClickListener(this);
-      view.findViewById(R.id.btn_teacher_detail).setOnClickListener(this);
-      view.findViewById(R.id.btn_teacher_subject).setOnClickListener(this);
+        view.findViewById(R.id.userinfo).setOnClickListener(this);
+        view.findViewById(R.id.btn_login).setOnClickListener(this);
+        view.findViewById(R.id.btn_teacher_detail).setOnClickListener(this);
+        view.findViewById(R.id.btn_teacher_subject).setOnClickListener(this);
         return view;
     }
 
 
     @Override
     public void onClick(View v) {
-     int id = v.getId();
-        switch (id){
+        int id = v.getId();
+        switch (id) {
             case R.id.userinfo:
                 startActivity(new Intent(getActivity(), UpdateUserInfoActivity.class));
                 break;

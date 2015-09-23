@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -61,7 +60,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-             app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+                app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -154,90 +153,91 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:orientation="vertical"
-    android:layout_gravity="bottom"
-    android:background="@android:color/white"
-    >
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/text_black_two" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:layout_gravity="bottom"
         android:background="@android:color/white"
-        >
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
-    android:layout_weight="1"
-    >
-    <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:src="@mipmap/laoshixq_bottom_ico_shoucang"
-        android:layout_marginRight="5dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="收藏"
-        android:gravity="center"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_14sp"
-        />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/text_black_two" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="1"
-            >
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@mipmap/laoshixq_bottom_ico_liaotian"
-                android:layout_marginRight="5dp"
-                />
-            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/linear_collect"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="聊天提问"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/text_14sp"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="1"
-            >
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@mipmap/laoshixq_bottom_ico_yuyue"
-                android:layout_marginRight="5dp"
-                />
-            <TextView
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/laoshixq_bottom_ico_shoucang" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="收藏"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="预约老师"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/text_price"
-                android:textSize="@dimen/text_14sp"
-                />
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/laoshixq_bottom_ico_liaotian" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="聊天提问"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/laoshixq_bottom_ico_yuyue" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="预约老师"
+                    android:textColor="@color/text_price"
+                    android:textSize="@dimen/text_14sp" />
+            </LinearLayout>
         </LinearLayout>
-        </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
